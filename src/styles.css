@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "primeflex/primeflex.css";
+
+@import "primeng/resources/themes/lara-dark-amber/theme.css";
+@import "primeng/resources/primeng.css";
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
