@@ -24,7 +24,7 @@
     max-height: 83vh;
 }
 
-.main__sidebar {
+.root__sidebar {
     background-color: red;
     flex: 1 1 auto;
     min-width: min-content;
@@ -35,7 +35,7 @@
     overflow-y: auto;
 }
 
-.main__content {
+.root__content {
     background-color: blue;
     flex: 1 1 auto;
     min-width: min-content;
