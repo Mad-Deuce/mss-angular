@@ -12,7 +12,7 @@ import {FooterComponent} from "./footer/footer.component";
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, SidebarComponent, ContentComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'mss-angular';
