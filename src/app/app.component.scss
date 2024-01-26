@@ -1,58 +1,63 @@
+$header-height: 10vh;
+$main-height: 80vh;
+$footer-height: 7vh;
+
 .root {
-    max-height: 100vh;
-    width: 100vw;
-    max-width: 100vw;
+  max-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .root__header {
+    margin: 0 0.25rem;
+    background-color: yellow;
+    min-height: 2rem;
+    //height: $header-height;
+    //max-height: $header-height;
+  }
+
+  .root__main {
+    flex: 1 1 0;
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.25rem;
+    height: $main-height;
+    max-height: $main-height;
 
-    .root__header {
-        margin: 0 0.25rem;
-        background-color: yellow;
-        min-height: 2rem;
-        height: 10vh;
-        max-height: 10vh;
+    .root__sidebar {
+      background-color: red;
+      flex: 1 1 auto;
+      min-width: min-content;
+      max-width: 20vw;
+      min-height: inherit;
+      height: inherit;
+      max-height: inherit;
+      overflow-y: auto;
     }
 
-    .root__main {
-        flex: 1 1 0;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 0.25rem;
-        height:  83vh;
-        max-height: 83vh;
-
-        .root__sidebar {
-            background-color: red;
-            flex: 1 1 auto;
-            min-width: min-content;
-            max-width: 20vw;
-            min-height: inherit;
-            height:  inherit;
-            max-height: inherit;
-            overflow-y: auto;
-        }
-
-        .root__content {
-            background-color: blue;
-            flex: 1 1 auto;
-            min-width: min-content;
-            margin-left: 0.25rem;
-            min-height: inherit;
-            height:  inherit;
-            max-height: inherit;
-            overflow-y: auto;
-        }
-
+    .root__content {
+      background-color: blue;
+      flex: 1 1 auto;
+      min-width: min-content;
+      margin-left: 0.25rem;
+      min-height: inherit;
+      height: inherit;
+      max-height: inherit;
+      overflow-y: auto;
     }
-    .root__footer {
-        margin: 0 0.25rem;
-        background-color: green;
-        min-height: 2rem;
-        height: 7vh;
-        max-height: 7vh;
-    }
+
+  }
+
+  .root__footer {
+    margin: 0 0.25rem;
+    background-color: green;
+    min-height: 2rem;
+    height: $footer-height;
+    max-height: $footer-height;
+  }
 }
 
 
