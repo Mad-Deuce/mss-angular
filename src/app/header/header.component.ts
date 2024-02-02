@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ImageModule} from "primeng/image";
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {MenuItem} from "primeng/api";
 import {LogoComponent} from "./logo/logo.component";
+
+declare function particles(): void;
 
 @Component({
   selector: 'app-header',
@@ -15,11 +17,11 @@ import {LogoComponent} from "./logo/logo.component";
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent  implements OnInit{
+export class HeaderComponent implements OnInit, AfterViewInit {
 
-  title:string = "Metro.iD";
+  title: string = "Metro.iD";
   // logoImgPath: string="/assets/image/mid_logo.png";
-  logoImgPath: string="/assets/svg/mid_logo_2.svg";
+  logoImgPath: string = "/assets/svg/mid_logo_2.svg";
   // logoImgPath: string="/assets/svg/logo.svg";
 
   items: MenuItem[] | undefined;
@@ -27,8 +29,12 @@ export class HeaderComponent  implements OnInit{
   home: MenuItem | undefined;
 
   ngOnInit(): void {
-    this.items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
-    this.home = { icon: 'pi pi-home', routerLink: '/' };
+    this.items = [{label: 'Computer'}, {label: 'Notebook'}, {label: 'Accessories'}, {label: 'Backpacks'}, {label: 'Item'}];
+    this.home = {icon: 'pi pi-home', routerLink: '/'};
+  }
+
+  ngAfterViewInit(): void {
+    particles();
   }
 
 }

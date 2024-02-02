@@ -34,7 +34,7 @@
             "scripts": [
               "src/assets/js/TweenLite.js",
               "src/assets/js/EasePack.js",
-              "src/assets/js/demo.js"
+              "src/assets/js/particles.js"
             ]
           },
           "configurations": {
