@@ -1,6 +1,6 @@
 function particles() {
-  let width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
-  let parent;
+  let width, height, canvas, ctx, points, target, animateHeader = true;
+  let parent, parent_parent;
 
   // Main
   initHeader();
@@ -8,21 +8,13 @@ function particles() {
   addListeners();
 
   function initHeader() {
-    // width = window.innerWidth;
-    // height = window.innerHeight;
-    // target = {x: width/2, y: height/2};
-
-    // largeHeader = document.getElementById('large-header');
-    // largeHeader.style.height = height+'px';
-
     canvas = document.getElementById('particles');
     parent = canvas.parentElement;
-    width = parent.offsetWidth;
-    height = parent.offsetHeight;
-    target = {x: width / 2, y: height / 2};
+    parent_parent = parent.parentElement;
 
-    canvas.width = width;
-    canvas.height = height;
+    resize();
+
+    target = {x: width / 2, y: height / 2};
     ctx = canvas.getContext('2d');
 
     // create points
@@ -101,11 +93,8 @@ function particles() {
   }
 
   function resize() {
-    width = parent.offsetWidth;
-    height = parent.offsetHeight;
-    // width = window.innerWidth;
-    // height = window.innerHeight;
-    // largeHeader.style.height = height+'px';
+    width = parent_parent.offsetWidth;
+    height = parent_parent.offsetHeight;
     canvas.width = width;
     canvas.height = height;
   }

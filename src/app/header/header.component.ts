@@ -19,13 +19,7 @@ declare function particles(): void;
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
 
-  title: string = "Metro.iD";
-  // logoImgPath: string="/assets/image/mid_logo.png";
-  logoImgPath: string = "/assets/svg/mid_logo_2.svg";
-  // logoImgPath: string="/assets/svg/logo.svg";
-
   items: MenuItem[] | undefined;
-
   home: MenuItem | undefined;
 
   ngOnInit(): void {
