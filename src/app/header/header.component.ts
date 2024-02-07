@@ -25,11 +25,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.items = [{label: 'Computer'}, {label: 'Notebook'}, {label: 'Accessories'}, {label: 'Backpacks'}, {label: 'Item'}];
     this.home = {icon: 'pi pi-home', routerLink: '/'};
-    particles();
   }
 
   ngAfterViewInit(): void {
-
+    particles();
   }
 
 }
