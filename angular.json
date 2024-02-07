@@ -32,9 +32,10 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "src/assets/js/particles.js",
               "src/assets/js/TweenLite.js",
-              "src/assets/js/EasePack.js",
-              "src/assets/js/particles.js"
+              "src/assets/js/EasePack.js"
+
             ]
           },
           "configurations": {
