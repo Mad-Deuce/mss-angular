@@ -1,1 +1,48 @@
-<p  class="bg-blue-500">content works!</p>
+<p-tabView class=""
+           [(activeIndex)]="activeTabIndex"
+           [scrollable]="true"
+           [controlClose]="false"
+           (onClose)="removeTab($event.index)"
+           (activeIndexChange)="activeIndexChange($event)"
+>
+
+  <p-tabPanel
+    *ngFor="let tab of tabs"
+    [header]="tab.tabHeader"
+    [closable]="true">
+
+    <div [ngSwitch]="tab.id">
+      <ng-template ngSwitchCase="11">
+        <ng-container [ngTemplateOutlet]="template21"
+                      [ngTemplateOutletContext]="context"></ng-container>
+      </ng-template>
+
+      <ng-template ngSwitchCase="21">
+        <ng-container [ngTemplateOutlet]="template21"
+                      [ngTemplateOutletContext]="context"
+        ></ng-container>
+      </ng-template>
+
+      <ng-template ngSwitchDefault>
+        <ng-container [ngTemplateOutlet]="templateDefault"
+                      [ngTemplateOutletContext]="context"
+        ></ng-container>
+      </ng-template>
+    </div>
+
+
+  </p-tabPanel>
+</p-tabView>
+
+<ng-template #template11 let-tabNode="context">
+  <div>template 1</div>
+</ng-template>
+
+<ng-template #template21 let-tabNode="context">
+  <div>template 2</div>
+</ng-template>
+
+<ng-template #templateDefault let-tabNode="tabNode">
+  {{ tabNode.label }}
+  <div>template Default</div>
+</ng-template>
