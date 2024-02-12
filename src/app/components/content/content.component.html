@@ -11,9 +11,10 @@
     [header]="tab.tabHeader"
     [closable]="true">
 
-    <div [ngSwitch]="tab.id">
+    <div [ngSwitch]="tab.template">
+
       <ng-template ngSwitchCase="11">
-        <ng-container [ngTemplateOutlet]="template21"
+        <ng-container [ngTemplateOutlet]="template11"
                       [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
@@ -34,11 +35,13 @@
   </p-tabPanel>
 </p-tabView>
 
-<ng-template #template11 let-tabNode="context">
+<ng-template #template11 let-tabNode="tabNode">
+  {{ tabNode.label }}
   <div>template 1</div>
 </ng-template>
 
-<ng-template #template21 let-tabNode="context">
+<ng-template #template21 let-tabNode="tabNode">
+  {{ tabNode.label }}
   <div>template 2</div>
 </ng-template>
 

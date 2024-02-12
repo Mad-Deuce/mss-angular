@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PanelMenuModule} from "primeng/panelmenu";
-import {MenuItem} from "primeng/api";
+import {MenuItem, MenuItemCommandEvent} from "primeng/api";
 import {MenuModule} from "primeng/menu";
+import {TabNode, TabViewService} from "../../services/tab-view.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -13,29 +14,57 @@ import {MenuModule} from "primeng/menu";
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent implements  OnInit{
+export class SidebarComponent implements OnInit {
+
+  constructor(private tabViewService: TabViewService) {
+  }
+
   items: MenuItem[] | undefined;
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'File',
-        icon: 'pi pi-fw pi-file',
-        // expanded: true,
+        label: 'Measuring Instruments',
+        icon: 'pi pi-fw pi-clock',
         items: [
           {
-            label: 'New',
-            icon: 'pi pi-fw pi-plus',
+            label: 'Lists',
+            icon: 'pi pi-fw pi-list',
             items: [
               {
-                label: 'Bookmark',
-                icon: 'pi pi-fw pi-bookmark'
+                label: 'Main List',
+                icon: '',
+                command: () => {
+                  this.onClick(new TabNode("0101", "mi-main", "Main List",
+                    "Main List of Measuring Instruments"));
+                },
               },
               {
-                label: 'Video',
-                icon: 'pi pi-fw pi-video'
-              }
-            ]
+                label: 'Indicators List',
+                icon: '',
+                command: () => {
+                  this.onClick(new TabNode("0102", "mi-indicators", "Indicators",
+                    "Indicators List"));
+                },
+              },
+              {
+                label: 'Long-term storage List',
+                icon: '',
+                command: () => {
+                  this.onClick(new TabNode("0103", "mi-long-term-storage", "Long-term storage List",
+                    "Long-term storage List of Measuring Instruments"));
+                },
+              },
+              {
+                label: 'List of instruments for metrology maintenance',
+                icon: '',
+                command: () => {
+                  this.onClick(new TabNode("0104", "mi-metrology-maintenance", "Maintenance List",
+                    "List of instruments for metrology maintenance"));
+                },
+              },
+            ],
+
           },
           {
             label: 'Delete',
@@ -134,5 +163,9 @@ export class SidebarComponent implements  OnInit{
         ]
       }
     ];
+  }
+
+  onClick(tabNode: TabNode) {
+    this.tabViewService.addTab(tabNode)
   }
 }
