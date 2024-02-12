@@ -1,6 +1,6 @@
 $header-height: 10vh;
 $main-height: 80vh;
-$footer-height: 7vh;
+$footer-height: 10vh;
 
 .root {
   max-height: 100vh;
@@ -40,9 +40,9 @@ $footer-height: 7vh;
 
     .root__content {
       background-color: blue;
-      flex: 1 1 auto;
+      flex: 1 1 0;
       min-width: 10vw;
-      //width: 80vw;
+      width: 80vw;
       max-width: 80vw;
       margin-left: 0.25rem;
       min-height: inherit;
