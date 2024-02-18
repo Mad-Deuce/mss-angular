@@ -13,15 +13,31 @@
 
     <div [ngSwitch]="tab.template">
 
-      <ng-template ngSwitchCase="11">
+      <ng-template ngSwitchCase="mi-list-main">
+        <ng-container [ngTemplateOutlet]="template21"
+                      [ngTemplateOutletContext]="context"></ng-container>
+      </ng-template>
+
+      <ng-template ngSwitchCase="mi-list-indicators">
+        <ng-container [ngTemplateOutlet]="template21"
+                      [ngTemplateOutletContext]="context"
+        ></ng-container>
+      </ng-template>
+
+      <ng-template ngSwitchCase="mi-list-long_term_storage">
         <ng-container [ngTemplateOutlet]="template11"
                       [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
-      <ng-template ngSwitchCase="21">
+      <ng-template ngSwitchCase="mi-list-technical_control">
         <ng-container [ngTemplateOutlet]="template21"
                       [ngTemplateOutletContext]="context"
         ></ng-container>
+      </ng-template>
+
+      <ng-template ngSwitchCase="mi-list-verification">
+        <ng-container [ngTemplateOutlet]="template11"
+                      [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
       <ng-template ngSwitchDefault>

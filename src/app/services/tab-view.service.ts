@@ -44,7 +44,7 @@ export class TabNode {
   public label: string = "";         // displaying in the tab label
   public tabHeader: string = "";        // displaying in the tab header
 
-  constructor(id: string, template: string, label: string, header: string) {
+  constructor(id: string, template: string, header: string, label: string) {
     this.id = id;
     this.template = template;
     this.label = label;
