@@ -13,8 +13,8 @@
 
     <div [ngSwitch]="tab.template">
 
-      <ng-template ngSwitchCase="mi-list-main">
-        <ng-container [ngTemplateOutlet]="template21"
+      <ng-template ngSwitchCase="mi_list_main">
+        <ng-container [ngTemplateOutlet]="mi_list_main"
                       [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
@@ -25,7 +25,7 @@
       </ng-template>
 
       <ng-template ngSwitchCase="mi-list-long_term_storage">
-        <ng-container [ngTemplateOutlet]="template11"
+        <ng-container [ngTemplateOutlet]="template21"
                       [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
@@ -36,7 +36,7 @@
       </ng-template>
 
       <ng-template ngSwitchCase="mi-list-verification">
-        <ng-container [ngTemplateOutlet]="template11"
+        <ng-container [ngTemplateOutlet]="template21"
                       [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
@@ -51,9 +51,9 @@
   </p-tabPanel>
 </p-tabView>
 
-<ng-template #template11 let-tabNode="tabNode">
+<ng-template #mi_list_main let-tabNode="tabNode">
   {{ tabNode.label }}
-  <div>template 1</div>
+  <app-mi-list-main></app-mi-list-main>
 </ng-template>
 
 <ng-template #template21 let-tabNode="tabNode">

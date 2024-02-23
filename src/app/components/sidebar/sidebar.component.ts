@@ -35,7 +35,7 @@ export class SidebarComponent implements OnInit {
                 label: 'Загальний перелік (ф.2050)',
                 icon: '',
                 command: () => {
-                  this.onClick(new TabNode("0101", "mi-list-main", "ф.2050",
+                  this.onClick(new TabNode("0101", "mi_list_main", "ф.2050",
                     "ПЕРЕЛІК ЗАСОБІВ ВИМІРЮВАЛЬНОЇ ТЕХНІКИ"));
                 },
               },
