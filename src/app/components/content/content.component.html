@@ -52,8 +52,7 @@
 </p-tabView>
 
 <ng-template #mi_list_main let-tabNode="tabNode">
-  {{ tabNode.label }}
-  <app-mi-list-main></app-mi-list-main>
+  <app-mi-list-main [tabNode]=tabNode></app-mi-list-main>
 </ng-template>
 
 <ng-template #template21 let-tabNode="tabNode">

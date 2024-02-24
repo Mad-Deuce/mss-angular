@@ -1,4 +1,7 @@
-export class PageDto {
+export class ResponseDto {
+
+  content: any;
+  pageable: any;
   last: boolean = true;
   totalPages: number = 0;
   totalElements: number = 0;
