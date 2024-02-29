@@ -5,13 +5,14 @@ import {HeaderComponent} from "./components/header/header.component";
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import {ContentComponent} from "./components/content/content.component";
 import {FooterComponent} from "./components/footer/footer.component";
+import {OrganizationFilterComponent} from "./components/temp/organization-filter/organization-filter.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet,
-    HeaderComponent, SidebarComponent, ContentComponent, FooterComponent,
+    HeaderComponent, SidebarComponent, ContentComponent, FooterComponent, OrganizationFilterComponent,
 
   ],
   templateUrl: './app.component.html',
