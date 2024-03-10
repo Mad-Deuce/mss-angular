@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component,  Input, OnInit, } from '@angular/core';
 import {TableLazyLoadEvent, TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
-import {MiListMainDto, MiListMainService} from "./mi-list-main.service";
+import {Filter, MiListMainDto, MiListMainService} from "./mi-list-main.service";
 import {TabNode} from "../../../services/tab-view.service";
+import {OrganizationFilterComponent} from "../../temp/organization-filter/organization-filter.component";
+import {TreeNodeSelectEvent} from "primeng/tree";
 
 
 @Component({
@@ -10,7 +12,8 @@ import {TabNode} from "../../../services/tab-view.service";
   standalone: true,
   imports: [
     TableModule,
-    ButtonModule
+    ButtonModule,
+    OrganizationFilterComponent
   ],
   providers: [MiListMainService],
   templateUrl: './mi-list-main.component.html',
@@ -23,6 +26,7 @@ export class MiListMainComponent implements OnInit {
   items!: MiListMainDto[];
   totalRecords: number = 0;
   rows: number = 25;
+  filters: Filter[] = [];
 
   constructor(private miListMainService: MiListMainService) {
   }
@@ -37,8 +41,18 @@ export class MiListMainComponent implements OnInit {
 
   }
 
-  loadItems($event: TableLazyLoadEvent) {
-    this.miListMainService.getDataAlt($event);
+  loadItems(filters: Filter[], $event?: TableLazyLoadEvent) {
+    this.miListMainService.getDataAlt(filters, $event,);
+  }
+
+  onLazyLoad($event: TableLazyLoadEvent,) {
+    this.loadItems(this.filters, $event);
+  }
+
+  onOrganizationFilterChanged($event: TreeNodeSelectEvent) {
+    let filter: Filter = new Filter("ownerOrganizationId", "byRoot", $event.node.data);
+    this.filters = Filter.addFilter(this.filters, filter);
+    this.loadItems(this.filters);
   }
 }
 

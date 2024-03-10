@@ -1,7 +1,7 @@
 <p-table
   [value]="items"
   [lazy]="true"
-  (onLazyLoad)="loadItems($event)"
+  (onLazyLoad)="onLazyLoad($event)"
   dataKey="id"
   [paginator]="true"
   [rows]="rows"
@@ -17,6 +17,7 @@
       {{ tabNode.label }}
       <p-button icon="pi pi-file-excel" severity="success" size="large"></p-button>
     </div>
+    <app-organization-filter (onChanged)="onOrganizationFilterChanged($event)"></app-organization-filter>
   </ng-template>
 
   <ng-template pTemplate="header">
