@@ -37,16 +37,16 @@ export class MiListMainService {
 
 export class MiListMainDto {
   id!: number;
-  measType: string | undefined;
+  measurementType: string | undefined;
   type: string | undefined;
   name: string | undefined;
   manufacturer: string | undefined;
   number: string | undefined;
-  measAccuracy: string | undefined;
-  measRange: string | undefined;
+  measurementAccuracy: string | undefined;
+  measurementRange: string | undefined;
   locate: string | undefined;
-  testOrg: string | undefined;
-  testType: string | undefined;
+  maintenanceOrganization: string | undefined;
+  maintenanceType: string | undefined;
   comment: string | undefined;
 }
 

@@ -22,31 +22,31 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th>Код виду вимірювань</th>
-      <th>Найменування ЗВТ</th>
-      <th>Умовне позначення, тип, система</th>
-      <th>Виробник</th>
-      <th>Номер</th>
-      <th>Клас точності, розряд, похибка</th>
-      <th>Діапазон вимірювань</th>
-      <th>Місце встановлення, експлуатації або зберігання</th>
-      <th>Найменування організації, що виконує повірку або технічний контроль</th>
-      <th>Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні</th>
-      <th>Примітка</th>
+      <th pSortableColumn="measurementType">Код виду вимірювань<p-sortIcon field="measurementType"></p-sortIcon></th>
+      <th pSortableColumn="type">Найменування ЗВТ<p-sortIcon field="type"></p-sortIcon></th>
+      <th pSortableColumn="name">Умовне позначення, тип, система<p-sortIcon field="name"></p-sortIcon></th>
+      <th pSortableColumn="manufacturer">Виробник<p-sortIcon field="manufacturer"></p-sortIcon></th>
+      <th pSortableColumn="number">Номер<p-sortIcon field="number"></p-sortIcon></th>
+      <th pSortableColumn="measurementAccuracy">Клас точності, розряд, похибка<p-sortIcon field="measurementAccuracy"></p-sortIcon></th>
+      <th pSortableColumn="measurementRange">Діапазон вимірювань<p-sortIcon field="measurementRange"></p-sortIcon></th>
+      <th pSortableColumn="locate">Місце встановлення, експлуатації або зберігання<p-sortIcon field="locate"></p-sortIcon></th>
+      <th pSortableColumn="maintenanceOrganization">Найменування організації, що виконує повірку або технічний контроль<p-sortIcon field="maintenanceOrganization"></p-sortIcon></th>
+      <th pSortableColumn="maintenanceType">Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні<p-sortIcon field="maintenanceType"></p-sortIcon></th>
+      <th pSortableColumn="comment">Примітка<p-sortIcon field="comment"></p-sortIcon></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
-      <td>{{ item.measType }}</td>
+      <td>{{ item.measurementType }}</td>
       <td>{{ item.type }}</td>
       <td>{{ item.name }}</td>
       <td>{{ item.manufacturer }}</td>
       <td>{{ item.number }}</td>
-      <td>{{ item.measAccuracy }}</td>
-      <td>{{ item.measRange }}</td>
+      <td>{{ item.measurementAccuracy }}</td>
+      <td>{{ item.measurementRange }}</td>
       <td>{{ item.locate }}</td>
-      <td>{{ item.testOrg }}</td>
-      <td>{{ item.testType }}</td>
+      <td>{{ item.maintenanceOrganization }}</td>
+      <td>{{ item.maintenanceType }}</td>
       <td>{{ item.comment }}</td>
     </tr>
   </ng-template>
