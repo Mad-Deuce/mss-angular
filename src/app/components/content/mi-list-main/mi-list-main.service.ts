@@ -55,10 +55,10 @@ export class Filter {
   operator: string = "";
   right: string = "";
 
-  constructor(left: string, operator: string, right: string) {
-    this.left = left;
-    this.operator = operator;
-    this.right = right;
+  constructor(left: string | undefined, operator: string | undefined, right: string | undefined) {
+    this.left = left != undefined ? left : "";
+    this.operator = operator != undefined ? operator : "";
+    this.right = right != undefined ? right : "";
   }
 
   static addFilter(filters: Filter[], filter: Filter): Filter[] {
@@ -72,6 +72,20 @@ export class Filter {
     if (!tItem) {
       filters.push(new Filter(filter.left, filter.operator, filter.right));
     }
+
+    return filters;
+  }
+
+  static removeFilterByLeft(filters: Filter[], left: string): Filter[] {
+    if (!filters && !left) return [];
+    if (!left) return filters;
+    if (!filters) return [];
+
+    let tFilters: Filter[] = filters.filter(value => value.left == left)
+    tFilters.forEach(() => {
+      let i = filters.findIndex(value => value.left == left);
+      filters.splice(i, 1);
+    })
 
     return filters;
   }

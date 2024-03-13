@@ -1,4 +1,4 @@
-import {Component,  Input, OnInit, } from '@angular/core';
+import {Component, Input, OnInit,} from '@angular/core';
 import {TableLazyLoadEvent, TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
 import {Filter, MiListMainDto, MiListMainService} from "./mi-list-main.service";
@@ -46,6 +46,25 @@ export class MiListMainComponent implements OnInit {
   }
 
   onLazyLoad($event: TableLazyLoadEvent,) {
+    let keys: string[];
+    if ($event.filters) {
+      let filters = $event.filters;
+      keys = Object.keys(filters);
+      keys.forEach(key => {
+        let evFilter: any = filters[key];
+        if (evFilter[0].value){
+          let operator = evFilter[0].matchMode;
+          let right = "\'" + evFilter[0].value + "\'";
+          let filter: Filter = new Filter(key, operator, right);
+          this.filters = Filter.addFilter(this.filters, filter);
+        } else {
+          this.filters = Filter.removeFilterByLeft(this.filters, key);
+        }
+
+      })
+    }
+
+
     this.loadItems(this.filters, $event);
   }
 

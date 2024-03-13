@@ -22,17 +22,49 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="measurementType">Код виду вимірювань<p-sortIcon field="measurementType"></p-sortIcon></th>
-      <th pSortableColumn="type">Найменування ЗВТ<p-sortIcon field="type"></p-sortIcon></th>
-      <th pSortableColumn="name">Умовне позначення, тип, система<p-sortIcon field="name"></p-sortIcon></th>
-      <th pSortableColumn="manufacturer">Виробник<p-sortIcon field="manufacturer"></p-sortIcon></th>
-      <th pSortableColumn="number">Номер<p-sortIcon field="number"></p-sortIcon></th>
-      <th pSortableColumn="measurementAccuracy">Клас точності, розряд, похибка<p-sortIcon field="measurementAccuracy"></p-sortIcon></th>
-      <th pSortableColumn="measurementRange">Діапазон вимірювань<p-sortIcon field="measurementRange"></p-sortIcon></th>
-      <th pSortableColumn="locate">Місце встановлення, експлуатації або зберігання<p-sortIcon field="locate"></p-sortIcon></th>
-      <th pSortableColumn="maintenanceOrganization">Найменування організації, що виконує повірку або технічний контроль<p-sortIcon field="maintenanceOrganization"></p-sortIcon></th>
-      <th pSortableColumn="maintenanceType">Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні<p-sortIcon field="maintenanceType"></p-sortIcon></th>
-      <th pSortableColumn="comment">Примітка<p-sortIcon field="comment"></p-sortIcon></th>
+      <th>
+          Код виду вимірювань
+      </th>
+      <th pSortableColumn="type">Найменування ЗВТ
+        <p-sortIcon field="type"></p-sortIcon>
+      </th>
+      <th pSortableColumn="name">Умовне позначення, тип, система
+        <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="manufacturer">Виробник
+        <p-sortIcon field="manufacturer"></p-sortIcon>
+      </th>
+      <th pSortableColumn="number">Номер
+        <p-sortIcon field="number"></p-sortIcon>
+      </th>
+      <th pSortableColumn="measurementAccuracy">Клас точності, розряд, похибка
+        <p-sortIcon field="measurementAccuracy"></p-sortIcon>
+      </th>
+      <th pSortableColumn="measurementRange">Діапазон вимірювань
+        <p-sortIcon field="measurementRange"></p-sortIcon>
+      </th>
+      <th pSortableColumn="locate">Місце встановлення, експлуатації або зберігання
+        <p-sortIcon field="locate"></p-sortIcon>
+      </th>
+      <th pSortableColumn="maintenanceOrganization">Найменування організації, що виконує повірку або технічний контроль
+        <p-sortIcon field="maintenanceOrganization"></p-sortIcon>
+      </th>
+      <th pSortableColumn="maintenanceType">Підлягають повірці або технічному контролю, переведені в індикатори,
+        знаходяться на зберіганні
+        <p-sortIcon field="maintenanceType"></p-sortIcon>
+      </th>
+      <th pSortableColumn="comment">Примітка
+        <p-sortIcon field="comment"></p-sortIcon>
+      </th>
+    </tr>
+    <tr pSortableColumn="measurementType">
+      <div class="flex justify-content-evenly align-items-center">
+        <p-sortIcon field="measurementType"></p-sortIcon>
+        <p-columnFilter type="text" field="measurementType"
+                        display="menu" matchMode="~"
+                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
+                        class="ml-auto"></p-columnFilter>
+      </div>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
