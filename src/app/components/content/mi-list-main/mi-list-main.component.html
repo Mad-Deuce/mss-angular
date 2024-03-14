@@ -10,6 +10,7 @@
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [rowsPerPageOptions]="[10, 25, 50, 100]"
   [totalRecords]="totalRecords"
+  [filters]="filtersMetadata"
 >
 
   <ng-template pTemplate="caption">
@@ -18,12 +19,16 @@
       <p-button icon="pi pi-file-excel" severity="success" size="large"></p-button>
     </div>
     <app-organization-filter (onChanged)="onOrganizationFilterChanged($event)"></app-organization-filter>
+    <div class="card flex align-items-center gap-2 flex-wrap">
+      <p-chip *ngFor="let filter of filters" label="{{filter.right}}" [removable]="true"
+              (onRemove)="onChipRemove(filter)"></p-chip>
+    </div>
   </ng-template>
 
   <ng-template pTemplate="header">
     <tr>
       <th>
-          Код виду вимірювань
+        Код виду вимірювань
       </th>
       <th pSortableColumn="type">Найменування ЗВТ
         <p-sortIcon field="type"></p-sortIcon>
@@ -63,6 +68,7 @@
         <p-columnFilter type="text" field="measurementType"
                         display="menu" matchMode="~"
                         [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
+
                         class="ml-auto"></p-columnFilter>
       </div>
     </tr>

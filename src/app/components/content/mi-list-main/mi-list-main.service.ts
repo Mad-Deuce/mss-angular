@@ -89,4 +89,10 @@ export class Filter {
 
     return filters;
   }
+
+  static getRightValues(filters: Filter[]): string[] {
+    let result: string[] = [];
+    filters.forEach(value => result.push(value.right))
+    return result;
+  }
 }
