@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {TableLazyLoadEvent} from "primeng/table";
+import {FilterMetadata} from "primeng/api";
 
 @Injectable()
 export class MiListMainService {
@@ -15,15 +16,28 @@ export class MiListMainService {
   constructor(private http: HttpClient) {
   }
 
-  getDataAlt(filters: Filter[], event?: TableLazyLoadEvent,): void {
+  getDataAlt(filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; }, event?: TableLazyLoadEvent,): void {
 
     let params = new HttpParams()
       .set("page", (event?.first && event.rows ? (event?.first / event.rows).toString() : ""))
       .set("size", (event?.rows ? event.rows.toString() : ""))
       .set("sort", (event?.sortField ? event.sortField + "," + (event.sortOrder === 1 ? "asc" : "desc") : ""))
 
-    filters.forEach(item => {
-      params = params.set("filter", (item.left + " " + item.operator + " " + item.right));
+    Object.keys(filtersMetadata).forEach((value) => {
+
+      // @ts-ignore
+      if (filtersMetadata[value][0].value) {
+        let left: string = value;
+
+        // @ts-ignore
+        let operator: string = filtersMetadata[value][0].matchMode;
+
+        // @ts-ignore
+        let right: string = "\'" + filtersMetadata[value][0].value + "\'";
+
+        params = params.set("filter", (left + " " + operator + " " + right));
+      }
+
     })
 
     this.http.get<any>(this.serverBaseUrl + 'api/measuring-instruments/list-main', {params})
@@ -50,49 +64,49 @@ export class MiListMainDto {
   comment: string | undefined;
 }
 
-export class Filter {
-  left: string = "";
+export class FilterChip {
+  field: string = "";
   operator: string = "";
-  right: string = "";
+  value: string = "";
 
   constructor(left: string | undefined, operator: string | undefined, right: string | undefined) {
-    this.left = left != undefined ? left : "";
+    this.field = left != undefined ? left : "";
     this.operator = operator != undefined ? operator : "";
-    this.right = right != undefined ? right : "";
+    this.value = right != undefined ? right : "";
   }
 
-  static addFilter(filters: Filter[], filter: Filter): Filter[] {
+  static addFilter(filters: FilterChip[], filter: FilterChip): FilterChip[] {
     if (!filters && !filter) return [];
     if (!filter) return filters;
     if (!filters) return new Array(filter);
 
-    let tItem: Filter | undefined = filters.find(item => {
-      return item.left == filter.left && item.operator == filter.operator && item.right == filter.right;
+    let tItem: FilterChip | undefined = filters.find(item => {
+      return item.field == filter.field && item.operator == filter.operator && item.value == filter.value;
     })
     if (!tItem) {
-      filters.push(new Filter(filter.left, filter.operator, filter.right));
+      filters.push(new FilterChip(filter.field, filter.operator, filter.value));
     }
 
     return filters;
   }
 
-  static removeFilterByLeft(filters: Filter[], left: string): Filter[] {
+  static removeFilterByLeft(filters: FilterChip[], left: string): FilterChip[] {
     if (!filters && !left) return [];
     if (!left) return filters;
     if (!filters) return [];
 
-    let tFilters: Filter[] = filters.filter(value => value.left == left)
+    let tFilters: FilterChip[] = filters.filter(value => value.field == left)
     tFilters.forEach(() => {
-      let i = filters.findIndex(value => value.left == left);
+      let i = filters.findIndex(value => value.field == left);
       filters.splice(i, 1);
     })
 
     return filters;
   }
 
-  static getRightValues(filters: Filter[]): string[] {
+  static getRightValues(filters: FilterChip[]): string[] {
     let result: string[] = [];
-    filters.forEach(value => result.push(value.right))
+    filters.forEach(value => result.push(value.value))
     return result;
   }
 }

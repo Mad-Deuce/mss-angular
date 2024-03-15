@@ -1,4 +1,4 @@
-<p-table
+<p-table #dt
   [value]="items"
   [lazy]="true"
   (onLazyLoad)="onLazyLoad($event)"
@@ -18,9 +18,9 @@
       {{ tabNode.label }}
       <p-button icon="pi pi-file-excel" severity="success" size="large"></p-button>
     </div>
-    <app-organization-filter (onChanged)="onOrganizationFilterChanged($event)"></app-organization-filter>
+    <app-organization-filter (onChanged)="onOrganizationFilterChanged($event, dt)"></app-organization-filter>
     <div class="card flex align-items-center gap-2 flex-wrap">
-      <p-chip *ngFor="let filter of filters" label="{{filter.right}}" [removable]="true"
+      <p-chip *ngFor="let filter of chips" label="{{filter.value}}" [removable]="true"
               (onRemove)="onChipRemove(filter)"></p-chip>
     </div>
   </ng-template>

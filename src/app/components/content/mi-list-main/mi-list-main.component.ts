@@ -1,7 +1,7 @@
 import {Component, Input, OnInit,} from '@angular/core';
-import {TableLazyLoadEvent, TableModule} from "primeng/table";
+import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
-import {Filter, MiListMainDto, MiListMainService} from "./mi-list-main.service";
+import {FilterChip, MiListMainDto, MiListMainService} from "./mi-list-main.service";
 import {TabNode} from "../../../services/tab-view.service";
 import {OrganizationFilterComponent} from "../../temp/organization-filter/organization-filter.component";
 import {TreeNodeSelectEvent} from "primeng/tree";
@@ -36,7 +36,7 @@ export class MiListMainComponent implements OnInit {
   totalRecords: number = 0;
   rows: number = 25;
 
-  filters: Filter[] = [];
+  chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
 
   constructor(private miListMainService: MiListMainService) {
@@ -52,8 +52,8 @@ export class MiListMainComponent implements OnInit {
 
   }
 
-  loadItems(filters: Filter[], $event?: TableLazyLoadEvent) {
-    this.miListMainService.getDataAlt(filters, $event,);
+  loadItems( $event?: TableLazyLoadEvent) {
+    this.miListMainService.getDataAlt(this.filtersMetadata, $event,);
   }
 
   onLazyLoad($event: TableLazyLoadEvent,) {
@@ -66,39 +66,36 @@ export class MiListMainComponent implements OnInit {
         if (evFilter[0].value) {
           let operator = evFilter[0].matchMode;
           let right = "\'" + evFilter[0].value + "\'";
-          let filter: Filter = new Filter(key, operator, right);
-          this.filters = Filter.addFilter(this.filters, filter);
+          let filter: FilterChip = new FilterChip(key, operator, right);
+          this.chips = FilterChip.addFilter(this.chips, filter);
         } else {
-          this.filters = Filter.removeFilterByLeft(this.filters, key);
+          this.chips = FilterChip.removeFilterByLeft(this.chips, key);
         }
 
       })
     }
 
-
-    this.loadItems(this.filters, $event);
+    this.loadItems($event);
   }
 
-  onOrganizationFilterChanged($event: TreeNodeSelectEvent) {
-    let filter: Filter = new Filter("ownerOrganizationId", "byRoot", $event.node.data);
-    this.filters = Filter.addFilter(this.filters, filter);
-    this.loadItems(this.filters);
+  onOrganizationFilterChanged($event: TreeNodeSelectEvent, dt: Table) {
+    dt.filter($event.node.data,"ownerOrganizationId", "byRoot");
   }
 
-  onChipRemove(filter: Filter) {
-    this.filters = Filter.removeFilterByLeft(this.filters, filter.left);
+  onChipRemove(filter: FilterChip) {
+    this.chips = FilterChip.removeFilterByLeft(this.chips, filter.field);
 
-    if (this.filtersMetadata[filter.left]) {
-      if (Array.isArray(this.filtersMetadata[filter.left])) {
-        let arr: FilterMetadata[] = <FilterMetadata[]>this.filtersMetadata[filter.left];
+    if (this.filtersMetadata[filter.field]) {
+      if (Array.isArray(this.filtersMetadata[filter.field])) {
+        let arr: FilterMetadata[] = <FilterMetadata[]>this.filtersMetadata[filter.field];
         arr.forEach(value => value.value = null);
       } else {
-        let s: FilterMetadata = <FilterMetadata>this.filtersMetadata[filter.left];
+        let s: FilterMetadata = <FilterMetadata>this.filtersMetadata[filter.field];
         s.value = null;
       }
     }
 
-    this.loadItems(this.filters);
+    this.loadItems();
   }
 }
 
