@@ -81,6 +81,9 @@ export class MiListMainComponent implements OnInit {
   onOrganizationFilterChanged($event: TreeNodeSelectEvent, dt: Table) {
     dt.filter($event.node.data, "ownerOrganizationId", "byRoot");
   }
+  onOrganizationFilterReset(dt: Table) {
+    dt.filter(null, "ownerOrganizationId", "byRoot");
+  }
 
   onChipRemove(filter: FilterChip) {
     this.chips = FilterChip.removeChipsByField(this.chips, filter.field);
@@ -94,7 +97,6 @@ export class MiListMainComponent implements OnInit {
         s.value = null;
       }
     }
-
     this.loadItems();
   }
 }

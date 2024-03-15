@@ -1,16 +1,16 @@
 <p-table #dt
-  [value]="items"
-  [lazy]="true"
-  (onLazyLoad)="onLazyLoad($event)"
-  dataKey="id"
-  [paginator]="true"
-  [rows]="rows"
-  [showCurrentPageReport]="true"
-  [tableStyle]="{'min-width': '60rem'}"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [rowsPerPageOptions]="[10, 25, 50, 100]"
-  [totalRecords]="totalRecords"
-  [filters]="filtersMetadata"
+         [value]="items"
+         [lazy]="true"
+         (onLazyLoad)="onLazyLoad($event)"
+         dataKey="id"
+         [paginator]="true"
+         [rows]="rows"
+         [showCurrentPageReport]="true"
+         [tableStyle]="{'min-width': '60rem'}"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+         [rowsPerPageOptions]="[10, 25, 50, 100]"
+         [totalRecords]="totalRecords"
+         [filters]="filtersMetadata"
 >
 
   <ng-template pTemplate="caption">
@@ -18,7 +18,9 @@
       {{ tabNode.label }}
       <p-button icon="pi pi-file-excel" severity="success" size="large"></p-button>
     </div>
-    <app-organization-filter (onChanged)="onOrganizationFilterChanged($event, dt)"></app-organization-filter>
+    <app-organization-filter (onChanged)="onOrganizationFilterChanged($event, dt)"
+                             (onReset)="onOrganizationFilterReset(dt)"
+    ></app-organization-filter>
     <div class="card flex align-items-center gap-2 flex-wrap">
       <p-chip *ngFor="let filter of chips"
               label="{{filter.value}}"
@@ -29,12 +31,8 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th>
-        Код виду вимірювань
-      </th>
-      <th pSortableColumn="type">Найменування ЗВТ
-        <p-sortIcon field="type"></p-sortIcon>
-      </th>
+      <th>Код виду вимірювань</th>
+      <th>Найменування ЗВТ</th>
       <th pSortableColumn="name">Умовне позначення, тип, система
         <p-sortIcon field="name"></p-sortIcon>
       </th>
@@ -74,7 +72,15 @@
                           class="ml-auto"></p-columnFilter>
         </div>
       </th>
-
+      <th pSortableColumn="type">
+        <div class="flex justify-content-evenly align-items-center">
+          <p-sortIcon field="type"></p-sortIcon>
+          <p-columnFilter type="text" field="type"
+                          display="menu" matchMode="~"
+                          [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
+                          class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>

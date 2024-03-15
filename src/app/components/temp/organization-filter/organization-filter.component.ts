@@ -20,6 +20,7 @@ export class OrganizationFilterComponent implements OnInit {
   selectedNodes: any;
 
   @Output() onChanged = new EventEmitter<TreeNodeSelectEvent>();
+  @Output() onReset = new EventEmitter();
 
   constructor(private nodeService: OrganizationFilterService) {
 
@@ -36,9 +37,10 @@ export class OrganizationFilterComponent implements OnInit {
     this.onChanged.emit($event);
   }
 
-  onClear($event: any) {
-    console.log("node select");
-    console.log($event);
+  onClear() {
+    this.onReset.emit();
+    console.log("node clear");
+    console.log();
   }
 
 
