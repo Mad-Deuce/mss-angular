@@ -23,21 +23,33 @@ export class MiListMainService {
       .set("size", (event?.rows ? event.rows.toString() : ""))
       .set("sort", (event?.sortField ? event.sortField + "," + (event.sortOrder === 1 ? "asc" : "desc") : ""))
 
+
+    let left: string;
+    let operator: string;
+    let right: string;
     Object.keys(filtersMetadata).forEach((value) => {
 
-      // @ts-ignore
-      if (filtersMetadata[value][0].value) {
-        let left: string = value;
-
-        // @ts-ignore
-        let operator: string = filtersMetadata[value][0].matchMode;
-
-        // @ts-ignore
-        let right: string = "\'" + filtersMetadata[value][0].value + "\'";
-
-        params = params.set("filter", (left + " " + operator + " " + right));
+      if (filtersMetadata[value]) {
+        if (Array.isArray(filtersMetadata[value])) {
+          let arr: FilterMetadata[] = <FilterMetadata[]>filtersMetadata[value];
+          arr.forEach(item => {
+            if (item.value){
+              left = value;
+              operator = item.matchMode ? item.matchMode : "";
+              right = "\'" + item.value + "\'";
+              params = params.append("filter", (left + " " + operator + " " + right));
+            }
+          });
+        } else {
+          let s: FilterMetadata = <FilterMetadata>filtersMetadata[value];
+          if (s.value){
+            left = value;
+            operator = s.matchMode ? s.matchMode : "";
+            right = "\'" + s.value + "\'";
+            params = params.append("filter", (left + " " + operator + " " + right));
+          }
+        }
       }
-
     })
 
     this.http.get<any>(this.serverBaseUrl + 'api/measuring-instruments/list-main', {params})
@@ -75,7 +87,7 @@ export class FilterChip {
     this.value = right != undefined ? right : "";
   }
 
-  static addFilter(filters: FilterChip[], filter: FilterChip): FilterChip[] {
+  static addChip(filters: FilterChip[], filter: FilterChip): FilterChip[] {
     if (!filters && !filter) return [];
     if (!filter) return filters;
     if (!filters) return new Array(filter);
@@ -90,14 +102,14 @@ export class FilterChip {
     return filters;
   }
 
-  static removeFilterByLeft(filters: FilterChip[], left: string): FilterChip[] {
-    if (!filters && !left) return [];
-    if (!left) return filters;
+  static removeChipsByField(filters: FilterChip[], field: string): FilterChip[] {
+    if (!filters && !field) return [];
+    if (!field) return filters;
     if (!filters) return [];
 
-    let tFilters: FilterChip[] = filters.filter(value => value.field == left)
+    let tFilters: FilterChip[] = filters.filter(value => value.field == field)
     tFilters.forEach(() => {
-      let i = filters.findIndex(value => value.field == left);
+      let i = filters.findIndex(value => value.field == field);
       filters.splice(i, 1);
     })
 

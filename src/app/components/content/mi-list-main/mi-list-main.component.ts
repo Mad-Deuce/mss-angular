@@ -52,7 +52,7 @@ export class MiListMainComponent implements OnInit {
 
   }
 
-  loadItems( $event?: TableLazyLoadEvent) {
+  loadItems($event?: TableLazyLoadEvent) {
     this.miListMainService.getDataAlt(this.filtersMetadata, $event,);
   }
 
@@ -65,11 +65,11 @@ export class MiListMainComponent implements OnInit {
         let evFilter: any = filters[key];
         if (evFilter[0].value) {
           let operator = evFilter[0].matchMode;
-          let right = "\'" + evFilter[0].value + "\'";
+          let right = evFilter[0].value;
           let filter: FilterChip = new FilterChip(key, operator, right);
-          this.chips = FilterChip.addFilter(this.chips, filter);
+          if (key != "ownerOrganizationId") this.chips = FilterChip.addChip(this.chips, filter);
         } else {
-          this.chips = FilterChip.removeFilterByLeft(this.chips, key);
+          this.chips = FilterChip.removeChipsByField(this.chips, key);
         }
 
       })
@@ -79,11 +79,11 @@ export class MiListMainComponent implements OnInit {
   }
 
   onOrganizationFilterChanged($event: TreeNodeSelectEvent, dt: Table) {
-    dt.filter($event.node.data,"ownerOrganizationId", "byRoot");
+    dt.filter($event.node.data, "ownerOrganizationId", "byRoot");
   }
 
   onChipRemove(filter: FilterChip) {
-    this.chips = FilterChip.removeFilterByLeft(this.chips, filter.field);
+    this.chips = FilterChip.removeChipsByField(this.chips, filter.field);
 
     if (this.filtersMetadata[filter.field]) {
       if (Array.isArray(this.filtersMetadata[filter.field])) {

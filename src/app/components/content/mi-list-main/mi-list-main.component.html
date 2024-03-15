@@ -20,7 +20,9 @@
     </div>
     <app-organization-filter (onChanged)="onOrganizationFilterChanged($event, dt)"></app-organization-filter>
     <div class="card flex align-items-center gap-2 flex-wrap">
-      <p-chip *ngFor="let filter of chips" label="{{filter.value}}" [removable]="true"
+      <p-chip *ngFor="let filter of chips"
+              label="{{filter.value}}"
+              [removable]="true"
               (onRemove)="onChipRemove(filter)"></p-chip>
     </div>
   </ng-template>
@@ -63,14 +65,16 @@
       </th>
     </tr>
     <tr pSortableColumn="measurementType">
-      <div class="flex justify-content-evenly align-items-center">
-        <p-sortIcon field="measurementType"></p-sortIcon>
-        <p-columnFilter type="text" field="measurementType"
-                        display="menu" matchMode="~"
-                        [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
+      <th>
+        <div class="flex justify-content-evenly align-items-center">
+          <p-sortIcon field="measurementType"></p-sortIcon>
+          <p-columnFilter type="text" field="measurementType"
+                          display="menu" matchMode="~"
+                          [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
+                          class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
 
-                        class="ml-auto"></p-columnFilter>
-      </div>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
