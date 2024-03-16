@@ -31,34 +31,34 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th>Код виду вимірювань</th>
-      <th>Найменування ЗВТ</th>
-      <th pSortableColumn="name">Умовне позначення, тип, система
+      <th pTooltip="Код виду вимірювань" class="text-center">Вид<br/>вимір.</th>
+      <th pTooltip="Найменування ЗВТ"  class="text-center">Найм.<br/>ЗВТ</th>
+
+      <th pSortableColumn="name" pTooltip="Умовне позначення, тип, система">Тип<br/>ЗВТ
         <p-sortIcon field="name"></p-sortIcon>
       </th>
-      <th pSortableColumn="manufacturer">Виробник
+      <th pSortableColumn="manufacturer" class="text-center">Виробник<br/>ЗВТ
         <p-sortIcon field="manufacturer"></p-sortIcon>
       </th>
-      <th pSortableColumn="number">Номер
+      <th pSortableColumn="number" class="text-center">Номер<br/>ЗВТ
         <p-sortIcon field="number"></p-sortIcon>
       </th>
-      <th pSortableColumn="measurementAccuracy">Клас точності, розряд, похибка
+      <th pSortableColumn="measurementAccuracy" pTooltip="Клас точності, розряд, похибка" class="text-center">Точність<br/>ЗВТ
         <p-sortIcon field="measurementAccuracy"></p-sortIcon>
       </th>
-      <th pSortableColumn="measurementRange">Діапазон вимірювань
+      <th pSortableColumn="measurementRange" class="text-center">Діапазон<br/>вимірювань
         <p-sortIcon field="measurementRange"></p-sortIcon>
       </th>
-      <th pSortableColumn="locate">Місце встановлення, експлуатації або зберігання
+      <th pSortableColumn="locate" pTooltip="Місце встановлення, експлуатації або зберігання" class="text-center">Розташ.
         <p-sortIcon field="locate"></p-sortIcon>
       </th>
-      <th pSortableColumn="maintenanceOrganization">Найменування організації, що виконує повірку або технічний контроль
+      <th pSortableColumn="maintenanceOrganization" pTooltip="Найменування організації, що виконує повірку або технічний контроль" class="text-center">Організація<br/>МО
         <p-sortIcon field="maintenanceOrganization"></p-sortIcon>
       </th>
-      <th pSortableColumn="maintenanceType">Підлягають повірці або технічному контролю, переведені в індикатори,
-        знаходяться на зберіганні
+      <th pSortableColumn="maintenanceType" pTooltip="Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні" class="text-center">Вид<br/>МО
         <p-sortIcon field="maintenanceType"></p-sortIcon>
       </th>
-      <th pSortableColumn="comment">Примітка
+      <th pSortableColumn="comment" class="text-center">Примітка
         <p-sortIcon field="comment"></p-sortIcon>
       </th>
     </tr>

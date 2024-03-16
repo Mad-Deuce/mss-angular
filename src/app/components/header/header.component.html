@@ -3,7 +3,7 @@
 </div>
 
 
-<div class="surface-ground flex flex-row justify-content-between m-0 px-2 min-w-min z-1">
+<div id="header_top" class="surface-ground flex flex-row justify-content-between m-0 px-2 min-w-min z-1">
     <div class="flex flex-row align-items-center ">
         <app-logo></app-logo>
         <div class="font-bold text-4xl text-primary px-3">Metro.iD</div>
@@ -14,11 +14,17 @@
     </div>
 
     <div class="flex flex-row">
-        <h2>icons |</h2>
-        <h2>| menu</h2>
+<!--        <h2>icons |</h2>-->
+<!--        <h2>| menu</h2>-->
     </div>
 
 
 </div>
 
-<p-breadcrumb class="max-w-full"  [model]="items" [home]="home"></p-breadcrumb>
+<div class="surface-ground flex flex-row justify-content-between ">
+  <p-breadcrumb class="max-w-full" [model]="breadcrumbsItems" [home]="breadcrumbsHome"></p-breadcrumb>
+
+  <p-menu #menu [model]="menuItems" [popup]="true"></p-menu>
+  <p-button label="{{menuLabel}}" [text]="true" icon="pi pi-bars" (click)="menu.toggle($event)" size="large"></p-button>
+</div>
+

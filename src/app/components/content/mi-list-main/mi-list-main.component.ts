@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {ChipModule} from "primeng/chip";
 import {NgForOf} from "@angular/common";
 import {FilterMetadata} from "primeng/api";
+import {TooltipModule} from "primeng/tooltip";
 
 
 @Component({
@@ -22,7 +23,8 @@ import {FilterMetadata} from "primeng/api";
     ChipsModule,
     FormsModule,
     ChipModule,
-    NgForOf
+    NgForOf,
+    TooltipModule
   ],
   providers: [MiListMainService],
   templateUrl: './mi-list-main.component.html',
@@ -49,7 +51,6 @@ export class MiListMainComponent implements OnInit {
     this.miListMainService.totalRecordsSubject.subscribe(value => {
       this.totalRecords = value;
     })
-
   }
 
   loadItems($event?: TableLazyLoadEvent) {
@@ -81,6 +82,7 @@ export class MiListMainComponent implements OnInit {
   onOrganizationFilterChanged($event: TreeNodeSelectEvent, dt: Table) {
     dt.filter($event.node.data, "ownerOrganizationId", "byRoot");
   }
+
   onOrganizationFilterReset(dt: Table) {
     dt.filter(null, "ownerOrganizationId", "byRoot");
   }

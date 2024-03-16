@@ -1,6 +1,6 @@
 function particles() {
   let width, height, canvas, ctx, points, target, animateHeader = true;
-  let parent, parent_parent;
+  let parent, parent_parent, headerTop;
 
   // Main
   initHeader();
@@ -12,6 +12,8 @@ function particles() {
     canvas = document.getElementById('particles');
     parent = canvas.parentElement;
     parent_parent = parent.parentElement;
+
+    headerTop = document.getElementById('header_top');
 
     resize();
 
@@ -93,8 +95,8 @@ function particles() {
   }
 
   function resize() {
-    width = parent_parent.offsetWidth;
-    height = parent_parent.offsetHeight;
+    width = headerTop.offsetWidth;
+    height = headerTop.offsetHeight;
     canvas.width = width;
     canvas.height = height;
   }
