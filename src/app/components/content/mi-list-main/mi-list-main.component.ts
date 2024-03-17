@@ -11,6 +11,7 @@ import {ChipModule} from "primeng/chip";
 import {NgForOf} from "@angular/common";
 import {FilterMetadata} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
+import {Column, ColumnsService} from "./columns.service";
 
 
 @Component({
@@ -26,7 +27,7 @@ import {TooltipModule} from "primeng/tooltip";
     NgForOf,
     TooltipModule
   ],
-  providers: [MiListMainService],
+  providers: [MiListMainService, ColumnsService],
   templateUrl: './mi-list-main.component.html',
   styleUrl: './mi-list-main.component.scss'
 })
@@ -43,7 +44,7 @@ export class MiListMainComponent implements OnInit {
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
 
-  constructor(private miListMainService: MiListMainService) {
+  constructor(private miListMainService: MiListMainService, private columnsService: ColumnsService) {
   }
 
   ngOnInit() {
@@ -55,19 +56,7 @@ export class MiListMainComponent implements OnInit {
       this.totalRecords = value;
     })
 
-    this.cols = [
-      {field: "measurementType", header: 'Вид\n вимір.', tooltip: "Код виду вимірювань"},
-      {field: "type", header: 'Найм.\n ЗВТ', tooltip: "Найменування ЗВТ"},
-      {field: "name", header: 'Тип\n ЗВТ', tooltip: "Умовне позначення, тип, система"},
-      {field: "manufacturer", header: 'Виробник\n ЗВТ', tooltip: ""},
-      {field: "number", header: 'Номер\n ЗВТ', tooltip: ""},
-      {field: "measurementAccuracy", header: 'Точність\n ЗВТ', tooltip: "Клас точності, розряд, похибка"},
-      {field: "measurementRange", header: 'Діапазон\nвимірювань', tooltip: ""},
-      {field: "locate", header: 'Розташ.', tooltip: "Місце встановлення, експлуатації або зберігання"},
-      {field: "maintenanceOrganization", header: 'Організація\nМО', tooltip: "Найменування організації, що виконує повірку або технічний контроль"},
-      {field: "maintenanceType", header: 'Вид\nМО', tooltip: "Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні"},
-      {field: "comment", header: 'Примітка', tooltip: ""},
-    ];
+    this.cols = this.columnsService.getColumns(this.tabNode.template);
   }
 
   loadItems($event?: TableLazyLoadEvent) {
@@ -121,8 +110,4 @@ export class MiListMainComponent implements OnInit {
 }
 
 
-export class Column {
-  field?: string;
-  header?: string;
-  tooltip?: string;
-}
+
