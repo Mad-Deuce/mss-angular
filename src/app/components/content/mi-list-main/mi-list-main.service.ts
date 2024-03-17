@@ -4,6 +4,7 @@ import {BehaviorSubject} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {TableLazyLoadEvent} from "primeng/table";
 import {FilterMetadata} from "primeng/api";
+import {TabNode} from "../../../services/tab-view.service";
 
 @Injectable()
 export class MiListMainService {
@@ -16,7 +17,9 @@ export class MiListMainService {
   constructor(private http: HttpClient) {
   }
 
-  getDataAlt(filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; }, event?: TableLazyLoadEvent,): void {
+  getDataAlt(tabNode: TabNode, filtersMetadata: {
+    [s: string]: FilterMetadata | FilterMetadata[];
+  }, event?: TableLazyLoadEvent,): void {
 
     let params = new HttpParams()
       .set("page", (event?.first && event.rows ? (event?.first / event.rows).toString() : ""))
@@ -33,7 +36,7 @@ export class MiListMainService {
         if (Array.isArray(filtersMetadata[value])) {
           let arr: FilterMetadata[] = <FilterMetadata[]>filtersMetadata[value];
           arr.forEach(item => {
-            if (item.value){
+            if (item.value) {
               left = value;
               operator = item.matchMode ? item.matchMode : "";
               right = "\'" + item.value + "\'";
@@ -42,7 +45,7 @@ export class MiListMainService {
           });
         } else {
           let s: FilterMetadata = <FilterMetadata>filtersMetadata[value];
-          if (s.value){
+          if (s.value) {
             left = value;
             operator = s.matchMode ? s.matchMode : "";
             right = "\'" + s.value + "\'";
@@ -52,7 +55,8 @@ export class MiListMainService {
       }
     })
 
-    this.http.get<any>(this.serverBaseUrl + 'api/measuring-instruments/list-main', {params})
+    let uri: string = (tabNode.template).replaceAll("_","-");
+    this.http.get<any>(this.serverBaseUrl + 'api/measuring-instruments/' + uri, {params})
       .subscribe(value => {
         this.contentSubject.next(value.content)
         this.totalRecordsSubject.next(value.totalElements)

@@ -60,7 +60,7 @@ export class MiListMainComponent implements OnInit {
   }
 
   loadItems($event?: TableLazyLoadEvent) {
-    this.miListMainService.getDataAlt(this.filtersMetadata, $event,);
+    this.miListMainService.getDataAlt(this.tabNode, this.filtersMetadata, $event,);
   }
 
   onLazyLoad($event: TableLazyLoadEvent,) {
