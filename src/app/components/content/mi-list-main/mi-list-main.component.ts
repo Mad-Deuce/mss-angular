@@ -38,6 +38,8 @@ export class MiListMainComponent implements OnInit {
   totalRecords: number = 0;
   rows: number = 25;
 
+  cols!: Column[];
+
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
 
@@ -48,9 +50,24 @@ export class MiListMainComponent implements OnInit {
     this.miListMainService.contentSubject.subscribe(value => {
       this.items = value;
     })
+
     this.miListMainService.totalRecordsSubject.subscribe(value => {
       this.totalRecords = value;
     })
+
+    this.cols = [
+      {field: "measurementType", header: 'Вид\n вимір.', tooltip: "Код виду вимірювань"},
+      {field: "type", header: 'Найм.\n ЗВТ', tooltip: "Найменування ЗВТ"},
+      {field: "name", header: 'Тип\n ЗВТ', tooltip: "Умовне позначення, тип, система"},
+      {field: "manufacturer", header: 'Виробник\n ЗВТ', tooltip: ""},
+      {field: "number", header: 'Номер\n ЗВТ', tooltip: ""},
+      {field: "measurementAccuracy", header: 'Точність\n ЗВТ', tooltip: "Клас точності, розряд, похибка"},
+      {field: "measurementRange", header: 'Діапазон\nвимірювань', tooltip: ""},
+      {field: "locate", header: 'Розташ.', tooltip: "Місце встановлення, експлуатації або зберігання"},
+      {field: "maintenanceOrganization", header: 'Організація\nМО', tooltip: "Найменування організації, що виконує повірку або технічний контроль"},
+      {field: "maintenanceType", header: 'Вид\nМО', tooltip: "Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні"},
+      {field: "comment", header: 'Примітка', tooltip: ""},
+    ];
   }
 
   loadItems($event?: TableLazyLoadEvent) {
@@ -104,3 +121,8 @@ export class MiListMainComponent implements OnInit {
 }
 
 
+export class Column {
+  field?: string;
+  header?: string;
+  tooltip?: string;
+}

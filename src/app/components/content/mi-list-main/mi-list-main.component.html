@@ -1,5 +1,6 @@
 <p-table #dt
          [value]="items"
+         [columns]="cols"
          [lazy]="true"
          (onLazyLoad)="onLazyLoad($event)"
          dataKey="id"
@@ -29,73 +30,32 @@
     </div>
   </ng-template>
 
-  <ng-template pTemplate="header">
+  <ng-template pTemplate="header" let-columns>
     <tr>
-      <th pTooltip="Код виду вимірювань" class="text-center">Вид<br/>вимір.</th>
-      <th pTooltip="Найменування ЗВТ"  class="text-center">Найм.<br/>ЗВТ</th>
+      <th *ngFor="let col of columns" pTooltip="{{col.tooltip}}" class="text-center" style="white-space: pre-wrap">
+        {{ col.header }}
+      </th>
+    </tr>
 
-      <th pSortableColumn="name" pTooltip="Умовне позначення, тип, система">Тип<br/>ЗВТ
-        <p-sortIcon field="name"></p-sortIcon>
-      </th>
-      <th pSortableColumn="manufacturer" class="text-center">Виробник<br/>ЗВТ
-        <p-sortIcon field="manufacturer"></p-sortIcon>
-      </th>
-      <th pSortableColumn="number" class="text-center">Номер<br/>ЗВТ
-        <p-sortIcon field="number"></p-sortIcon>
-      </th>
-      <th pSortableColumn="measurementAccuracy" pTooltip="Клас точності, розряд, похибка" class="text-center">Точність<br/>ЗВТ
-        <p-sortIcon field="measurementAccuracy"></p-sortIcon>
-      </th>
-      <th pSortableColumn="measurementRange" class="text-center">Діапазон<br/>вимірювань
-        <p-sortIcon field="measurementRange"></p-sortIcon>
-      </th>
-      <th pSortableColumn="locate" pTooltip="Місце встановлення, експлуатації або зберігання" class="text-center">Розташ.
-        <p-sortIcon field="locate"></p-sortIcon>
-      </th>
-      <th pSortableColumn="maintenanceOrganization" pTooltip="Найменування організації, що виконує повірку або технічний контроль" class="text-center">Організація<br/>МО
-        <p-sortIcon field="maintenanceOrganization"></p-sortIcon>
-      </th>
-      <th pSortableColumn="maintenanceType" pTooltip="Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні" class="text-center">Вид<br/>МО
-        <p-sortIcon field="maintenanceType"></p-sortIcon>
-      </th>
-      <th pSortableColumn="comment" class="text-center">Примітка
-        <p-sortIcon field="comment"></p-sortIcon>
-      </th>
-    </tr>
     <tr>
-      <th pSortableColumn="measurementType">
-        <div class="flex justify-content-evenly align-items-center">
-          <p-sortIcon field="measurementType"></p-sortIcon>
-          <p-columnFilter type="text" field="measurementType"
+      <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+        <div class="flex justify-content-center align-items-center">
+          <p-sortIcon field="{{col.field}}"></p-sortIcon>
+          <p-columnFilter type="text" field="{{col.field}}"
                           display="menu" matchMode="~"
                           [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
-                          class="ml-auto"></p-columnFilter>
-        </div>
-      </th>
-      <th pSortableColumn="type">
-        <div class="flex justify-content-evenly align-items-center">
-          <p-sortIcon field="type"></p-sortIcon>
-          <p-columnFilter type="text" field="type"
-                          display="menu" matchMode="~"
-                          [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
-                          class="ml-auto"></p-columnFilter>
+          ></p-columnFilter>
         </div>
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-item>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr>
-      <td>{{ item.measurementType }}</td>
-      <td>{{ item.type }}</td>
-      <td>{{ item.name }}</td>
-      <td>{{ item.manufacturer }}</td>
-      <td>{{ item.number }}</td>
-      <td>{{ item.measurementAccuracy }}</td>
-      <td>{{ item.measurementRange }}</td>
-      <td>{{ item.locate }}</td>
-      <td>{{ item.maintenanceOrganization }}</td>
-      <td>{{ item.maintenanceType }}</td>
-      <td>{{ item.comment }}</td>
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
     </tr>
   </ng-template>
+
 </p-table>
