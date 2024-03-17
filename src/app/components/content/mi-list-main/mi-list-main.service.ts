@@ -17,9 +17,9 @@ export class MiListMainService {
   constructor(private http: HttpClient) {
   }
 
-  getDataAlt(tabNode: TabNode, filtersMetadata: {
-    [s: string]: FilterMetadata | FilterMetadata[];
-  }, event?: TableLazyLoadEvent,): void {
+  getData(tabNode: TabNode,
+          filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; },
+          event?: TableLazyLoadEvent,): void {
 
     let params = new HttpParams()
       .set("page", (event?.first && event.rows ? (event?.first / event.rows).toString() : ""))
@@ -55,13 +55,64 @@ export class MiListMainService {
       }
     })
 
-    let uri: string = (tabNode.template).replaceAll("_","-");
+    let uri: string = (tabNode.template).replaceAll("_", "-");
     this.http.get<any>(this.serverBaseUrl + 'api/measuring-instruments/' + uri, {params})
       .subscribe(value => {
         this.contentSubject.next(value.content)
         this.totalRecordsSubject.next(value.totalElements)
       });
   }
+
+  exportData(tabNode: TabNode,
+             filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; }): void {
+
+    let params = new HttpParams()
+
+    let left: string;
+    let operator: string;
+    let right: string;
+    Object.keys(filtersMetadata).forEach((value) => {
+
+      if (filtersMetadata[value]) {
+        if (Array.isArray(filtersMetadata[value])) {
+          let arr: FilterMetadata[] = <FilterMetadata[]>filtersMetadata[value];
+          arr.forEach(item => {
+            if (item.value) {
+              left = value;
+              operator = item.matchMode ? item.matchMode : "";
+              right = "\'" + item.value + "\'";
+              if (left == "ownerOrganizationId") params = params.append("filter", (left + " " + operator + " " + right));
+            }
+          });
+        } else {
+          let s: FilterMetadata = <FilterMetadata>filtersMetadata[value];
+          if (s.value) {
+            left = value;
+            operator = s.matchMode ? s.matchMode : "";
+            right = "\'" + s.value + "\'";
+            if (left == "ownerOrganizationId") params = params.append("filter", (left + " " + operator + " " + right));
+          }
+        }
+      }
+    })
+
+    let uri: string = (tabNode.template).replaceAll("_", "-");
+    this.http.get(this.serverBaseUrl + 'api/measuring-instruments/export/' + uri, {
+      params: params,
+      responseType: 'arraybuffer'
+    })
+      .subscribe((response) => this.downLoadFile(response, "application/ms-excel", tabNode.tabHeader));
+  }
+
+  private downLoadFile(data: any, type: string, reportName: string) {
+    let fileName = reportName + ".xlsx"
+    let blob = new Blob([data], {type: type});
+    let a = document.createElement('a');
+    a.download = fileName;
+    a.href = window.URL.createObjectURL(blob);
+    a.click();
+  }
+
 }
 
 

@@ -17,7 +17,10 @@
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
       {{ tabNode.label }}
-      <p-button icon="pi pi-file-excel" severity="success" size="large"></p-button>
+      <p-button icon="pi pi-file-excel"
+                [text]="true" severity="success" size="large"
+                (onClick)="onExportBtnClick()"
+      ></p-button>
     </div>
     <app-organization-filter (onChanged)="onOrganizationFilterChanged($event, dt)"
                              (onReset)="onOrganizationFilterReset(dt)"
