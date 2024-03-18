@@ -69,28 +69,24 @@ export class MiListMainService {
     let params = new HttpParams()
 
     let left: string;
-    let operator: string;
     let right: string;
     Object.keys(filtersMetadata).forEach((value) => {
-
       if (filtersMetadata[value]) {
         if (Array.isArray(filtersMetadata[value])) {
           let arr: FilterMetadata[] = <FilterMetadata[]>filtersMetadata[value];
           arr.forEach(item => {
             if (item.value) {
               left = value;
-              operator = item.matchMode ? item.matchMode : "";
-              right = "\'" + item.value + "\'";
-              if (left == "ownerOrganizationId") params = params.append("filter", (left + " " + operator + " " + right));
+              right = item.value ;
+              if (left == "ownerOrganizationId") params = params.set("ownerOrganizationRootId", right);
             }
           });
         } else {
           let s: FilterMetadata = <FilterMetadata>filtersMetadata[value];
           if (s.value) {
             left = value;
-            operator = s.matchMode ? s.matchMode : "";
-            right = "\'" + s.value + "\'";
-            if (left == "ownerOrganizationId") params = params.append("filter", (left + " " + operator + " " + right));
+            right =  s.value ;
+            if (left == "ownerOrganizationId") params = params.set("ownerOrganizationRootId", right);
           }
         }
       }
