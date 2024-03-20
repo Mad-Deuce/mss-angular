@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PanelMenuModule} from "primeng/panelmenu";
 import {MenuItem,} from "primeng/api";
 import {MenuModule} from "primeng/menu";
-import {TabNode, TabViewService} from "../../services/tab-view.service";
+import {TabNode, TabViewService} from "../../../services/tab-view.service";
 
 @Component({
   selector: 'app-sidebar',

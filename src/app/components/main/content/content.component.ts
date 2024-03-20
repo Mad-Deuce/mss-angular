@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TabViewModule} from "primeng/tabview";
 import {NgForOf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet} from "@angular/common";
-import {TabNode, TabViewService} from "../../services/tab-view.service";
+import {TabNode, TabViewService} from "../../../services/tab-view.service";
 import {MiListMainComponent} from "./mi-list-main/mi-list-main.component";
 
 @Component({

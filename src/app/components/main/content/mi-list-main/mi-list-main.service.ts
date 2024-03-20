@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../../../environments/environment";
 import {TableLazyLoadEvent} from "primeng/table";
 import {FilterMetadata} from "primeng/api";
-import {TabNode} from "../../../services/tab-view.service";
+import {TabNode} from "../../../../services/tab-view.service";
 
 @Injectable()
 export class MiListMainService {

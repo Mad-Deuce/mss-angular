@@ -44,10 +44,7 @@
       <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
         <div class="flex justify-content-center align-items-center">
           <p-sortIcon field="{{col.field}}"></p-sortIcon>
-          <p-columnFilter type="text" field="{{col.field}}"
-                          display="menu" matchMode="~"
-                          [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
-          ></p-columnFilter>
+          <app-multi-filter type="{{col.filterType}}" field="{{col.field}}" matchMode="{{col.filterMatchMode}}"></app-multi-filter>
         </div>
       </th>
     </tr>

@@ -2,8 +2,8 @@ import {Component, Input, OnInit,} from '@angular/core';
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
 import {FilterChip, MiListMainDto, MiListMainService} from "./mi-list-main.service";
-import {TabNode} from "../../../services/tab-view.service";
-import {OrganizationFilterComponent} from "../../temp/organization-filter/organization-filter.component";
+import {TabNode} from "../../../../services/tab-view.service";
+import {OrganizationFilterComponent} from "../__filters/organization-filter/organization-filter.component";
 import {TreeNodeSelectEvent} from "primeng/tree";
 import {ChipsModule} from "primeng/chips";
 import {FormsModule} from "@angular/forms";
@@ -12,6 +12,7 @@ import {NgForOf} from "@angular/common";
 import {FilterMetadata} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
 import {Column, ColumnsService} from "./columns.service";
+import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
 
 
 @Component({
@@ -25,7 +26,8 @@ import {Column, ColumnsService} from "./columns.service";
     FormsModule,
     ChipModule,
     NgForOf,
-    TooltipModule
+    TooltipModule,
+    MultiFilterComponent
   ],
   providers: [MiListMainService, ColumnsService],
   templateUrl: './mi-list-main.component.html',

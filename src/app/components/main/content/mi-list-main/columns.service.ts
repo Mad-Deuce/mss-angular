@@ -4,8 +4,17 @@ import {Injectable} from '@angular/core';
 export class ColumnsService {
 
   private columns: Map<string, Column> = new Map<string, Column>()
-    .set("measurementType", {field: "measurementType", header: 'Вид\n вимір.', tooltip: "Код виду вимірювань"})
-    .set("type", {field: "type", header: 'Найм.\n ЗВТ', tooltip: "Найменування ЗВТ"})
+    .set("measurementType", {
+      field: "measurementType",
+      header: 'Вид\n вимір.',
+      tooltip: "Код виду вимірювань",
+      filterType: "multi_select",
+      filterMatchMode: "in"
+    })
+    .set("type", {
+      field: "type", header: 'Найм.\n ЗВТ', tooltip: "Найменування ЗВТ", filterType: "text",
+      filterMatchMode: "~"
+    })
     .set("name", {field: "name", header: 'Тип\n ЗВТ', tooltip: "Умовне позначення, тип, система"})
     .set("manufacturer", {field: "manufacturer", header: 'Виробник\n ЗВТ', tooltip: ""})
     .set("number", {field: "number", header: 'Номер\n ЗВТ', tooltip: ""})
@@ -24,7 +33,9 @@ export class ColumnsService {
     .set("maintenanceType", {
       field: "maintenanceType",
       header: 'Вид\nМО',
-      tooltip: "Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні"
+      tooltip: "Підлягають повірці або технічному контролю, переведені в індикатори, знаходяться на зберіганні",
+      filterType: "multi_select",
+      filterMatchMode: "in"
     })
     .set("comment", {field: "comment", header: 'Примітка', tooltip: ""});
 
@@ -56,4 +67,6 @@ export class Column {
   field?: string;
   header?: string;
   tooltip?: string;
+  filterType?: string;
+  filterMatchMode?: string;
 }

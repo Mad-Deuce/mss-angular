@@ -1,0 +1,260 @@
+<ng-container [ngSwitch]="type">
+
+  <p-columnFilter *ngSwitchCase="'multi_select'"
+                  field="{{field}}" matchMode="{{matchMode}}"
+                  display="menu"
+                  [showMatchModes]="false"
+                  [showOperator]="false"
+                  [showAddButton]="false"
+                  [hideOnClear]="true"
+                  [showApplyButton]="false">
+    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+      <p-multiSelect [ngModel]="value"
+                     [options]="multiSelectOptions"
+                     (onChange)="filter($event.value)"
+                     [showHeader]="false">
+        <ng-template let-option pTemplate="item">
+          <div class="inline-block vertical-align-middle">
+            <span class="ml-1 mt-1">{{ option }}</span>
+          </div>
+        </ng-template>
+      </p-multiSelect>
+    </ng-template>
+  </p-columnFilter>
+
+  <p-columnFilter *ngSwitchCase="'text'"
+                  field="{{field}}" matchMode="{{matchMode}}"
+                  display="menu" type="text"
+                  [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
+  ></p-columnFilter>
+
+  <p-columnFilter *ngSwitchDefault
+                  field="{{field}}" matchMode="{{matchMode}}"
+                  display="menu" type="text"
+                  [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [hideOnClear]="true"
+  ></p-columnFilter>
+
+</ng-container>
+
+
+<!--<ng-template #multiSelect let-tFilter let-tValue>-->
+<!--  <p-multiSelect [ngModel]="tValue"-->
+<!--                 [options]="options"-->
+<!--                 (onChange)="tFilter($event.value)"-->
+<!--                 [showHeader]="false"-->
+
+<!--  >-->
+<!--    <ng-template let-option pTemplate="item">-->
+<!--      <div class="inline-block vertical-align-middle">-->
+<!--        <span class="ml-1 mt-1">{{ option }}</span>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--    &lt;!&ndash;        <ng-template pTemplate="selectedItems">&ndash;&gt;-->
+<!--    &lt;!&ndash;    &lt;!&ndash;      <i class="pi pi-file-excel"></i>&ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;          ff&ndash;&gt;-->
+<!--    &lt;!&ndash;        </ng-template>&ndash;&gt;-->
+<!--  </p-multiSelect>-->
+<!--  <p-dropdown [ngModel]="value" [options]="options" (onChange)="onChange($event.value)" placeholder="Any">-->
+
+<!--  </p-dropdown>-->
+
+<!--</ng-template>-->
+
+
+<!--<tr>-->
+<!--  <th></th>-->
+<!--  <th [ngSwitch]="col.field" class="text-xs p-1 m-auto text-center">-->
+
+<!--    <p-columnFilter *ngSwitchCase="'id'" type="text" field="id" matchMode="contains"-->
+<!--                    [matchModeOptions]="stringMatchModeOptions"-->
+<!--                    placeholder="id"></p-columnFilter>-->
+
+
+<!--    <p-columnFilter *ngSwitchCase="'railwayName'" field="railwayName" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="railwayOptions" placeholder="railway"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.name }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'subdivisionShortName'" field="subdivisionShortName" matchMode="in"-->
+<!--                    [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="subdivisionOptions"-->
+<!--                       placeholder="subdivision"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.name }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'rtdName'" field="rtdName" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="rtdOptions" placeholder="rtd"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.name }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'facilityName'" field="facilityName" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="facilityOptions" placeholder="facility"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.name }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'typeGroupName'" field="typeGroupName" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="groupOptions" placeholder="group"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.name }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'typeName'" field="typeName" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="typeOptions" placeholder="type"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.name }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'statusComment'" field="status" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="statuses" placeholder="status"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.comment }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'regionTypeComment'" field="regionType" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="regionTypes" placeholder="region type"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.comment }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'locateTypeComment'" field="locateType" matchMode="in" [showMenu]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-multiSelect [ngModel]="value" appendTo="body" [options]="locateTypes" placeholder="locate type"-->
+<!--                       (onChange)="filter($event.value)" optionLabel="name" [maxSelectedLabels]="1"-->
+<!--                       [selectedItemsLabel]="'{0} items'">-->
+<!--          <ng-template let-option pTemplate="item">-->
+<!--            <div class="inline-block vertical-align-middle">-->
+<!--              <span class="ml-1 mt-1">{{ option.comment }}</span>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-multiSelect>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+
+<!--    <p-columnFilter *ngSwitchCase="'releaseYear'" field="releaseYear"-->
+<!--                    [matchModeOptions]="hybridMatchModeOptions"-->
+<!--                    matchMode="is"-->
+<!--                    [showMenu]="true" [showClearButton]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-calendar [ngModel]="value"-->
+<!--                    view="year"-->
+<!--                    dateFormat="yy"-->
+<!--                    inputId="yearpicker"-->
+<!--                    (onClear)="filter($event)"-->
+<!--                    (onSelect)="filter($event)"-->
+<!--                    placeholder="release year"-->
+<!--                    [showClear]="true">-->
+<!--        </p-calendar>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'testDate'" field="testDate" [matchModeOptions]="dateMatchModeOptions"-->
+<!--                    matchMode="dateIs"-->
+<!--                    [showMenu]="true" [showClearButton]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-calendar [ngModel]="value"-->
+<!--                    view="date"-->
+<!--                    dateFormat="yy-mm-dd"-->
+<!--                    inputId="yearpicker"-->
+<!--                    (onClear)="filter($event)"-->
+<!--                    (onSelect)="filter($event)"-->
+<!--                    placeholder="test date"-->
+<!--                    [showClear]="true"-->
+<!--                    class="justify-content-evenly">-->
+<!--        </p-calendar>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'replacementPeriod'" type="numeric" field="replacementPeriod"-->
+<!--                    matchMode="equals"-->
+<!--                    [matchModeOptions]="numericMatchModeOptions"-->
+<!--                    placeholder="replacement period"></p-columnFilter>-->
+
+<!--    <p-columnFilter *ngSwitchCase="'nextTestDate'" field="nextTestDate"-->
+<!--                    [matchModeOptions]="dateMatchModeOptions"-->
+<!--                    matchMode="dateIs"-->
+<!--                    [showMenu]="true" [showClearButton]="false">-->
+<!--      <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+<!--        <p-calendar [ngModel]="value"-->
+<!--                    view="date"-->
+<!--                    dateFormat="yy-mm-dd"-->
+<!--                    inputId="yearpicker"-->
+<!--                    (onClear)="filter($event)"-->
+<!--                    (onSelect)="filter($event)"-->
+<!--                    placeholder="next test date"-->
+<!--                    [showClear]="true">-->
+<!--        </p-calendar>-->
+<!--      </ng-template>-->
+<!--    </p-columnFilter>-->
+
+
+<!--  </th>-->
+<!--</tr>-->
