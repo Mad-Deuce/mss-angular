@@ -1,7 +1,7 @@
 import {Component, Input, OnInit,} from '@angular/core';
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
-import {FilterChip, MiListMainDto, MiListMainService} from "./mi-list-main.service";
+import {MiListMainDto, MiListMainService} from "./mi-list-main.service";
 import {TabNode} from "../../../../services/tab-view.service";
 import {OrganizationFilterComponent} from "../__filters/organization-filter/organization-filter.component";
 import {TreeNodeSelectEvent} from "primeng/tree";
@@ -13,6 +13,7 @@ import {FilterMetadata} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
 import {Column, ColumnsService} from "./columns.service";
 import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
+import {FilterChip} from "../__filters/FilterChip";
 
 
 @Component({
@@ -45,6 +46,7 @@ export class MiListMainComponent implements OnInit {
 
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
+  // filtersMetadataAlt: Map<string, FilterMetadata | FilterMetadata[]> = new Map<string, FilterMetadata | FilterMetadata[]>();
 
   constructor(private miListMainService: MiListMainService, private columnsService: ColumnsService) {
   }
