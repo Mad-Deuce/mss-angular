@@ -1,6 +1,5 @@
 import {FilterMetadata} from "primeng/api";
 import {HttpParams} from "@angular/common/http";
-import {SpringFilter} from "spring-filter-ng";
 
 export class FilterMetaDataUtils {
 
@@ -51,7 +50,7 @@ export class FilterMetaDataUtils {
     return params;
   }
 
-  private static setRight(value: string | string[]): string {
+  private static setRight(value: string | string[]): string | undefined {
     if (!value) return "";
     let result: string;
     if (Array.isArray(value)) {
@@ -64,6 +63,7 @@ export class FilterMetaDataUtils {
     } else {
       result = "\'" + value + "\'";
     }
+    if (result=="[]" || result=="\'\'") return undefined;
     return result;
   }
 

@@ -1,4 +1,3 @@
-
 export class FilterChip {
   field: string = "";
   operator: string = "";
@@ -16,12 +15,15 @@ export class FilterChip {
     if (!filters) return new Array(filter);
 
     let tItem: FilterChip | undefined = filters.find(item => {
-      return item.field == filter.field && item.operator == filter.operator && item.value == filter.value;
+      return item.field == filter.field;
     })
     if (!tItem) {
       filters.push(new FilterChip(filter.field, filter.operator, filter.value));
+    } else {
+      tItem.value = filter.value;
     }
 
+    filters = this.clearChips(filters);
     return filters;
   }
 
@@ -36,7 +38,17 @@ export class FilterChip {
       filters.splice(i, 1);
     })
 
+    filters = this.clearChips(filters);
     return filters;
+  }
+
+  static clearChips(filters: FilterChip[]): FilterChip[] {
+    if (!filters || filters.length == 0) return [];
+
+    return  filters.filter(filter => {
+      return filter.value && filter.value.length > 0;
+    });
+
   }
 
   static getRightValues(filters: FilterChip[]): string[] {
