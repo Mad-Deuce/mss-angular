@@ -7,6 +7,7 @@
          [paginator]="true"
          [rows]="rows"
          [showCurrentPageReport]="true"
+         paginatorPosition="both"
          [tableStyle]="{'min-width': '60rem'}"
          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
          [rowsPerPageOptions]="[10, 25, 50, 100]"
@@ -20,12 +21,13 @@
       <p-button icon="pi pi-file-excel"
                 [text]="true" severity="success" size="large"
                 (onClick)="onExportBtnClick()"
+                pTooltip="Export to Excel File"
       ></p-button>
     </div>
     <app-organization-filter (onChanged)="onOrganizationFilterChanged($event, dt)"
                              (onReset)="onOrganizationFilterReset(dt)"
     ></app-organization-filter>
-    <div class="card flex align-items-center gap-2 flex-wrap">
+    <div class="card flex align-items-center gap-2 flex-wrap mt-1">
       <p-chip *ngFor="let filter of chips"
               label="{{filter.value}}"
               [removable]="true"
@@ -35,7 +37,8 @@
 
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns" pTooltip="{{col.tooltip}}" class="text-center" style="white-space: pre-wrap">
+      <th *ngFor="let col of columns" pTooltip="{{col.tooltip}}" class="text-center vertical-align-baseline"
+          style="white-space: pre-line">
         {{ col.header }}
       </th>
     </tr>
@@ -44,7 +47,8 @@
       <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
         <div class="flex justify-content-center align-items-center">
           <p-sortIcon field="{{col.field}}"></p-sortIcon>
-          <app-multi-filter type="{{col.filterType}}" field="{{col.field}}" matchMode="{{col.filterMatchMode}}"></app-multi-filter>
+          <app-multi-filter type="{{col.filterType}}" field="{{col.field}}"
+                            matchMode="{{col.filterMatchMode}}"></app-multi-filter>
         </div>
       </th>
     </tr>

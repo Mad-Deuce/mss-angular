@@ -23,7 +23,6 @@ export class OrganizationFilterComponent implements OnInit {
   @Output() onReset = new EventEmitter();
 
   constructor(private nodeService: OrganizationFilterService) {
-
   }
 
   ngOnInit(): void {

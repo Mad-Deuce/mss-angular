@@ -46,7 +46,6 @@ export class MiListMainComponent implements OnInit {
 
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
-  // filtersMetadataAlt: Map<string, FilterMetadata | FilterMetadata[]> = new Map<string, FilterMetadata | FilterMetadata[]>();
 
   constructor(private miListMainService: MiListMainService, private columnsService: ColumnsService) {
   }
