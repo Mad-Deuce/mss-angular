@@ -1,18 +1,17 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {BehaviorSubject} from "rxjs";
 import {environment} from "../../../../../environments/environment";
-import {TableLazyLoadEvent} from "primeng/table";
-import {FilterMetadata} from "primeng/api";
+import {BehaviorSubject} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {TabNode} from "../../../../services/tab-view.service";
+import {FilterMetadata} from "primeng/api";
+import {TableLazyLoadEvent} from "primeng/table";
 import {FilterMetaDataUtils} from "../__filters/FilterMetaDataUtils";
 
 @Injectable()
-export class MiListMainService {
-
+export class MiScheduleService {
   serverBaseUrl: string = environment.baseUrl;
 
-  contentSubject = new BehaviorSubject<MiListMainDto[]>([]);
+  contentSubject = new BehaviorSubject<MiScheduleDto[]>([]);
   totalRecordsSubject = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) {
@@ -40,31 +39,7 @@ export class MiListMainService {
   exportData(tabNode: TabNode,
              filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; }): void {
 
-    let params = new HttpParams()
-
-    let left: string;
-    let right: string;
-    Object.keys(filtersMetadata).forEach((value) => {
-      if (filtersMetadata[value]) {
-        if (Array.isArray(filtersMetadata[value])) {
-          let arr: FilterMetadata[] = <FilterMetadata[]>filtersMetadata[value];
-          arr.forEach(item => {
-            if (item.value) {
-              left = value;
-              right = item.value;
-              if (left == "ownerOrganizationId") params = params.set("ownerOrganizationRootId", right);
-            }
-          });
-        } else {
-          let s: FilterMetadata = <FilterMetadata>filtersMetadata[value];
-          if (s.value) {
-            left = value;
-            right = s.value;
-            if (left == "ownerOrganizationId") params = params.set("ownerOrganizationRootId", right);
-          }
-        }
-      }
-    })
+    let params = FilterMetaDataUtils.setParams(new HttpParams(), filtersMetadata);
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
     this.http.get(this.serverBaseUrl + 'api/measuring-instruments/export/' + uri, {
@@ -84,18 +59,32 @@ export class MiListMainService {
   }
 }
 
-export class MiListMainDto {
+export class MiScheduleDto {
   id!: number;
-  measurementType: string | undefined;
-  type: string | undefined;
-  name: string | undefined;
-  manufacturer: string | undefined;
-  number: string | undefined;
-  measurementAccuracy: string | undefined;
-  measurementRange: string | undefined;
-  locate: string | undefined;
-  maintenanceOrganization: string | undefined;
-  maintenanceType: string | undefined;
-  comment: string | undefined;
-}
 
+  ownerOrganizationId: number | undefined;
+  maintenanceOrganizationId: number | undefined;
+  maintenanceTypeId: number | undefined;
+
+  measurementType: string | undefined;
+  maintenanceTypeName: string | undefined;
+  name: string | undefined;
+  month: number | undefined;
+  year: number | undefined;
+  numbers: string[] | undefined;
+  dates: string[] | undefined;
+
+  totalCount: number | undefined;
+  month01Count: number | undefined;
+  month02Count: number | undefined;
+  month03Count: number | undefined;
+  month04Count: number | undefined;
+  month05Count: number | undefined;
+  month06Count: number | undefined;
+  month07Count: number | undefined;
+  month08Count: number | undefined;
+  month09Count: number | undefined;
+  month10Count: number | undefined;
+  month11Count: number | undefined;
+  month12Count: number | undefined;
+}

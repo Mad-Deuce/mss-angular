@@ -16,6 +16,7 @@
 >
 
   <ng-template pTemplate="caption">
+
     <div class="flex align-items-center justify-content-between">
       {{ tabNode.label }}
       <p-button icon="pi pi-file-excel"
@@ -24,10 +25,20 @@
                 pTooltip="Export to Excel File"
       ></p-button>
     </div>
-    <app-organization-filter placeholder="Виберіть підрозділ"
-                             (onChanged)="onOrganizationFilterChanged($event, dt)"
-                             (onReset)="onOrganizationFilterReset(dt)"
-    ></app-organization-filter>
+
+    <div class="flex align-items-center justify-content-between">
+      <app-organization-filter placeholder="Виконавець (погодження)"
+                               (onChanged)="onMaintenanceOrganizationFilterChanged($event, dt)"
+                               (onReset)="onMaintenanceOrganizationFilterReset(dt)"
+      ></app-organization-filter>
+      <app-organization-filter placeholder="Замовник (затвердженн)"
+                               (onChanged)="onOwnerOrganizationFilterChanged($event, dt)"
+                               (onReset)="onOwnerOrganizationFilterReset(dt)"
+      ></app-organization-filter>
+    </div>
+
+    <p-calendar [(ngModel)]="date" view="year" dateFormat="yy" inputId="yearpicker" (onSelect)="onYearChange($event, dt)"></p-calendar>
+
     <div class="card flex align-items-center gap-2 flex-wrap mt-1">
       <p-chip *ngFor="let filter of chips"
               label="{{filter.value}}"

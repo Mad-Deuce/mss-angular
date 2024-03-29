@@ -18,25 +18,8 @@
                       [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
-      <ng-template ngSwitchCase="mi-list-indicators">
-        <ng-container [ngTemplateOutlet]="template21"
-                      [ngTemplateOutletContext]="context"
-        ></ng-container>
-      </ng-template>
-
-      <ng-template ngSwitchCase="mi-list-long_term_storage">
-        <ng-container [ngTemplateOutlet]="template21"
-                      [ngTemplateOutletContext]="context"></ng-container>
-      </ng-template>
-
-      <ng-template ngSwitchCase="mi-list-technical_control">
-        <ng-container [ngTemplateOutlet]="template21"
-                      [ngTemplateOutletContext]="context"
-        ></ng-container>
-      </ng-template>
-
-      <ng-template ngSwitchCase="mi-list-verification">
-        <ng-container [ngTemplateOutlet]="template21"
+      <ng-template ngSwitchCase="mi_schedule_technical_control">
+        <ng-container [ngTemplateOutlet]="mi_schedule_technical_control"
                       [ngTemplateOutletContext]="context"></ng-container>
       </ng-template>
 
@@ -55,9 +38,8 @@
   <app-mi-list-main [tabNode]=tabNode></app-mi-list-main>
 </ng-template>
 
-<ng-template #template21 let-tabNode="tabNode">
-  {{ tabNode.label }}
-  <div>template 2</div>
+<ng-template #mi_schedule_technical_control let-tabNode="tabNode">
+  <app-mi-schedule [tabNode]=tabNode></app-mi-schedule>
 </ng-template>
 
 <ng-template #templateDefault let-tabNode="tabNode">

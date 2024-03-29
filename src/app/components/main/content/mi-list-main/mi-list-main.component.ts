@@ -11,7 +11,7 @@ import {ChipModule} from "primeng/chip";
 import {NgForOf} from "@angular/common";
 import {FilterMetadata} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
-import {Column, ColumnsService} from "./columns.service";
+import {Column, MiListColumnsService} from "./mi-list.columns.service";
 import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
 import {FilterChip} from "../__filters/FilterChip";
 
@@ -30,7 +30,7 @@ import {FilterChip} from "../__filters/FilterChip";
     TooltipModule,
     MultiFilterComponent
   ],
-  providers: [MiListMainService, ColumnsService],
+  providers: [MiListMainService, MiListColumnsService],
   templateUrl: './mi-list-main.component.html',
   styleUrl: './mi-list-main.component.scss'
 })
@@ -47,7 +47,7 @@ export class MiListMainComponent implements OnInit {
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
 
-  constructor(private miListMainService: MiListMainService, private columnsService: ColumnsService) {
+  constructor(private miListMainService: MiListMainService, private columnsService: MiListColumnsService) {
   }
 
   ngOnInit() {

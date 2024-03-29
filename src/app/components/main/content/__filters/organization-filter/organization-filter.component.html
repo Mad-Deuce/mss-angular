@@ -3,7 +3,7 @@
   containerStyleClass="w-full"
   [(ngModel)]="selectedNodes"
   [options]="nodes"
-  placeholder="Виберіть підрозділ"
+  placeholder="{{placeholder}}"
   [filter]="true"
   [filterInputAutoFocus]="true"
   (onNodeSelect)="onSelect($event)"

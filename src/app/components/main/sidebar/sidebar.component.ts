@@ -43,7 +43,7 @@ export class SidebarComponent implements OnInit {
                 label: 'Індикатори',
                 icon: '',
                 command: () => {
-                  this.onClick(new TabNode("0102", "mi-list-indicators", "Індикатори",
+                  this.onClick(new TabNode("0102", "mi_list_indicators", "Індикатори",
                     "ПЕРЕЛІК ЗАСОБІВ ВИМІРЮВАЛЬНОЇ ТЕХНІКИ ПЕРЕВЕДЕНИХ У РОЗРЯД ІНДИКАТОРІВ"));
                 },
               },
@@ -51,7 +51,7 @@ export class SidebarComponent implements OnInit {
                 label: 'Довготривале зберігання',
                 icon: '',
                 command: () => {
-                  this.onClick(new TabNode("0103", "mi-list-long_term_storage", "Довготривале зберігання",
+                  this.onClick(new TabNode("0103", "mi_list_long_term_storage", "Довготривале зберігання",
                     "ПЕРЕЛІК ЗАСОБІВ ВИМІРЮВАЛЬНОЇ ТЕХНІКИ ПЕРЕВЕДЕНИХ НА ДОВГОТРИВАЛЕ ЗБЕРІГАННЯ"));
                 },
               },
@@ -59,7 +59,7 @@ export class SidebarComponent implements OnInit {
                 label: 'Технічний контроль',
                 icon: '',
                 command: () => {
-                  this.onClick(new TabNode("0104", "mi-list-technical_control", "Технічний контроль",
+                  this.onClick(new TabNode("0104", "mi_list_technical_control", "Технічний контроль",
                     "ПЕРЕЛІК ЗАСОБІВ ВИМІРЮВАЛЬНОЇ ТЕХНІКИ, ЩО ПІДЛЯГАЮТЬ ТЕХНІЧНОМУ КОНТРОЛЮ"));
                 },
               },
@@ -67,7 +67,7 @@ export class SidebarComponent implements OnInit {
                 label: 'Повірка',
                 icon: '',
                 command: () => {
-                  this.onClick(new TabNode("0105", "mi-list-verification", "Повірка",
+                  this.onClick(new TabNode("0105", "mi_list_verification", "Повірка",
                     "ПЕРЕЛІК ЗАСОБІВ ВИМІРЮВАЛЬНОЇ ТЕХНІКИ, ЩО ПІДЛЯГАЮТЬ ПОВІРЦІ"));
                 },
               },
@@ -83,7 +83,7 @@ export class SidebarComponent implements OnInit {
                 label: 'Графік повірки',
                 icon: '',
                 command: () => {
-                  this.onClick(new TabNode("0201", "mi-schedule-verification", "Графік повірки",
+                  this.onClick(new TabNode("0201", "mi_schedule_verification", "Графік повірки",
                     "ГРАФІК ПОВІРКИ ЗАСОБІВ ВИМІРЮВАЛЬНОЇ ТЕХНІКИ"));
                 },
               },
@@ -92,7 +92,7 @@ export class SidebarComponent implements OnInit {
                 label: 'Графік технічного контролю',
                 icon: '',
                 command: () => {
-                  this.onClick(new TabNode("0202", "mi-schedule-technical_control", "Графік технічного контролю",
+                  this.onClick(new TabNode("0202", "mi_schedule_technical_control", "Графік технічного контролю",
                     "ГРАФІК ТЕХНІЧНОГО КОНТРОЛЮ ЗАСОБІВ ВИМІРЮВАЛЬНОЇ ТЕХНІКИ"));
                 },
               },

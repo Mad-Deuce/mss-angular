@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TreeSelectModule} from "primeng/treeselect";
 import {FormsModule} from "@angular/forms";
 import {OrganizationFilterService} from "./organization-filter.service";
@@ -19,8 +19,11 @@ export class OrganizationFilterComponent implements OnInit {
   nodes!: any[];
   selectedNodes: any;
 
+  @Input() placeholder: string = "";
+
   @Output() onChanged = new EventEmitter<TreeNodeSelectEvent>();
   @Output() onReset = new EventEmitter();
+
 
   constructor(private nodeService: OrganizationFilterService) {
   }
