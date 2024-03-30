@@ -40,6 +40,12 @@ export class ColumnsService {
       tooltip: "Дата останнього технічного контролю, періодичність (місяців)",
       filterType: "none"
     })
+    .set("maintenancePlace", {
+      field: "maintenancePlace",
+      header: 'Місце МО',
+      tooltip: "Місце проведення технічного контролю",
+      filterType: "none"
+    })
     .set("month01Count", {
       field: "month01Count",
       header: '01',
@@ -112,6 +118,12 @@ export class ColumnsService {
       tooltip: "",
       filterType: "none"
     })
+    .set("comment", {
+      field: "comment",
+      header: 'Примітка',
+      tooltip: "",
+      filterType: "none"
+    })
   ;
 
 
@@ -125,9 +137,10 @@ export class ColumnsService {
 
   private getMiScheduleTCColumns(): Column[] {
     let result: Column[] = [];
-    const keys: string[] = ["measurementType", "name", "numbers", "dates",
+    const keys: string[] = ["measurementType", "name", "numbers", "dates","maintenancePlace",
       "month01Count", "month02Count", "month03Count", "month04Count", "month05Count", "month06Count",
       "month07Count", "month08Count", "month09Count", "month10Count", "month11Count", "month12Count",
+      "comment"
     ];
     keys.forEach(value => {
       result.push(<Column>this.columns.get(value))

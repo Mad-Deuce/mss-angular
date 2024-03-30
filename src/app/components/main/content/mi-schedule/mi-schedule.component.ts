@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {ChipModule} from "primeng/chip";
 import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
@@ -38,7 +38,7 @@ export class MiScheduleComponent implements OnInit {
 
   @Input() tabNode!: TabNode;
 
-  date!: Date | undefined;
+  date: Date[] | undefined;
 
   items!: MiScheduleDto[];
   totalRecords: number = 0;
@@ -63,11 +63,13 @@ export class MiScheduleComponent implements OnInit {
 
     this.cols = this.columnsService.getColumns(this.tabNode.template);
 
-    this.date = new Date();
   }
 
   loadItems($event?: TableLazyLoadEvent) {
-    this.miScheduleService.getData(this.tabNode, this.filtersMetadata, $event,);
+    if (this.date) {
+      this.miScheduleService.getData(this.tabNode, this.filtersMetadata, $event,);
+    }
+
   }
 
   onLazyLoad($event: TableLazyLoadEvent,) {
@@ -81,7 +83,7 @@ export class MiScheduleComponent implements OnInit {
           let operator = evFilter[0].matchMode;
           let right = evFilter[0].value;
           let filter: FilterChip = new FilterChip(key, operator, right);
-          if (key != "ownerOrganizationId") this.chips = FilterChip.addChip(this.chips, filter);
+          if (key != "ownerOrganizationId" && key != "year") this.chips = FilterChip.addChip(this.chips, filter);
         } else {
           this.chips = FilterChip.removeChipsByField(this.chips, key);
         }
@@ -108,8 +110,7 @@ export class MiScheduleComponent implements OnInit {
     dt.filter(null, "ownerOrganizationId", "~");
   }
 
-  onYearChange(event: any, dt: Table) {
-    console.log(event);
+  onYearChange(event: Date, dt: Table) {
     dt.filter(event.getFullYear(), "year", "~");
   }
 

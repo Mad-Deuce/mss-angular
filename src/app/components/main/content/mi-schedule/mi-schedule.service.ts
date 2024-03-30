@@ -73,6 +73,7 @@ export class MiScheduleDto {
   year: number | undefined;
   numbers: string[] | undefined;
   dates: string[] | undefined;
+  maintenancePlace: string = "";
 
   totalCount: number | undefined;
   month01Count: number | undefined;
@@ -87,4 +88,6 @@ export class MiScheduleDto {
   month10Count: number | undefined;
   month11Count: number | undefined;
   month12Count: number | undefined;
+
+  comment: string = "";
 }

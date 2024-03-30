@@ -37,7 +37,12 @@
       ></app-organization-filter>
     </div>
 
-    <p-calendar [(ngModel)]="date" view="year" dateFormat="yy" inputId="yearpicker" (onSelect)="onYearChange($event, dt)"></p-calendar>
+    <p-calendar
+      [(ngModel)]="date"
+      view="year" dateFormat="yy" inputId="yearpicker"
+      (onSelect)="onYearChange($event, dt)"
+    ></p-calendar>
+
 
     <div class="card flex align-items-center gap-2 flex-wrap mt-1">
       <p-chip *ngFor="let filter of chips"
