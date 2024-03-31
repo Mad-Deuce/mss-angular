@@ -42,7 +42,7 @@ export class MiScheduleService {
     let params = FilterMetaDataUtils.setParams(new HttpParams(), filtersMetadata);
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
-    this.http.get(this.serverBaseUrl + 'api/measuring-instruments/export/' + uri, {
+    this.http.get(this.serverBaseUrl + 'api/measuring-instruments/' + uri + '/export', {
       params: params,
       responseType: 'arraybuffer'
     })

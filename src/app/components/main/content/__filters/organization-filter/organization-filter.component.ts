@@ -41,8 +41,6 @@ export class OrganizationFilterComponent implements OnInit {
 
   onClear() {
     this.onReset.emit();
-    console.log("node clear");
-    console.log();
   }
 
 
