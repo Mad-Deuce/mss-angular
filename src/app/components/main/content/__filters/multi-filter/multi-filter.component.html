@@ -11,7 +11,7 @@
   >
     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
       <p-multiSelect [ngModel]="value"
-                     [options]="multiSelectOptions"
+                     [options]="selectOptions"
                      (onChange)="filter($event.value)"
                      [showHeader]="false">
         <ng-template let-option pTemplate="item">

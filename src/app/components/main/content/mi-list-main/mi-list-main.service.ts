@@ -67,7 +67,7 @@ export class MiListMainService {
     })
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
-    this.http.get(this.serverBaseUrl + 'api/measuring-instruments/export/' + uri, {
+    this.http.get(this.serverBaseUrl + 'api/measuring-instruments/' + uri + '/export', {
       params: params,
       responseType: 'arraybuffer'
     })

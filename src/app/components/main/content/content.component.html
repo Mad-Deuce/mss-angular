@@ -14,19 +14,15 @@
     <div [ngSwitch]="tab.template">
 
       <ng-template ngSwitchCase="mi_list_main">
-        <ng-container [ngTemplateOutlet]="mi_list_main"
-                      [ngTemplateOutletContext]="context"></ng-container>
+        <ng-container *ngTemplateOutlet="mi_list_main;context:{tabNode:tab}"></ng-container>
       </ng-template>
 
       <ng-template ngSwitchCase="mi_schedule_technical_control">
-        <ng-container [ngTemplateOutlet]="mi_schedule_technical_control"
-                      [ngTemplateOutletContext]="context"></ng-container>
+        <ng-container *ngTemplateOutlet="mi_schedule_technical_control;context:{tabNode:tab}"></ng-container>
       </ng-template>
 
       <ng-template ngSwitchDefault>
-        <ng-container [ngTemplateOutlet]="templateDefault"
-                      [ngTemplateOutletContext]="context"
-        ></ng-container>
+        <ng-container *ngTemplateOutlet="templateDefault;context:{tabNode:tab}"></ng-container>
       </ng-template>
     </div>
 

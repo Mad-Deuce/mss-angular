@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {ChipModule} from "primeng/chip";
 import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
@@ -12,7 +12,7 @@ import {FilterChip} from "../__filters/FilterChip";
 import {TreeNodeSelectEvent} from "primeng/tree";
 import {MiScheduleDto, MiScheduleService} from "./mi-schedule.service";
 import {Column, ColumnsService} from "./mi-schedule.columns.service";
-import {CalendarModule, CalendarYearChangeEvent} from "primeng/calendar";
+import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -38,7 +38,7 @@ export class MiScheduleComponent implements OnInit {
 
   @Input() tabNode!: TabNode;
 
-  date: Date[] | undefined;
+  date: Date = new Date();
 
   items!: MiScheduleDto[];
   totalRecords: number = 0;
@@ -52,6 +52,7 @@ export class MiScheduleComponent implements OnInit {
   constructor(private miScheduleService: MiScheduleService, private columnsService: ColumnsService) {
   }
 
+
   ngOnInit() {
     this.miScheduleService.contentSubject.subscribe(value => {
       this.items = value;
@@ -63,13 +64,11 @@ export class MiScheduleComponent implements OnInit {
 
     this.cols = this.columnsService.getColumns(this.tabNode.template);
 
+    this.filtersMetadata = {year: [{value: this.date.getFullYear(), matchMode: "~", operator: "and"}]};
   }
 
   loadItems($event?: TableLazyLoadEvent) {
-    if (this.date) {
-      this.miScheduleService.getData(this.tabNode, this.filtersMetadata, $event,);
-    }
-
+    this.miScheduleService.getData(this.tabNode, this.filtersMetadata, $event,);
   }
 
   onLazyLoad($event: TableLazyLoadEvent,) {
@@ -78,15 +77,18 @@ export class MiScheduleComponent implements OnInit {
       let filters = $event.filters;
       keys = Object.keys(filters);
       keys.forEach(key => {
-        let evFilter: any = filters[key];
-        if (evFilter[0].value) {
-          let operator = evFilter[0].matchMode;
-          let right = evFilter[0].value;
-          let filter: FilterChip = new FilterChip(key, operator, right);
-          if (key != "ownerOrganizationId" && key != "year") this.chips = FilterChip.addChip(this.chips, filter);
-        } else {
-          this.chips = FilterChip.removeChipsByField(this.chips, key);
+        if (key != "ownerOrganizationId" && key != "year") {
+          let evFilter: any = filters[key];
+          if (evFilter[0].value) {
+            let operator = evFilter[0].matchMode;
+            let right = evFilter[0].value;
+            let filter: FilterChip = new FilterChip(key, operator, right);
+            if (key != "ownerOrganizationId" && key != "year") this.chips = FilterChip.addChip(this.chips, filter);
+          } else {
+            this.chips = FilterChip.removeChipsByField(this.chips, key);
+          }
         }
+
 
       })
     }

@@ -9,19 +9,17 @@ export class TabViewService {
   tabs: TabNode[] = [];
   tabsSubject = new BehaviorSubject<TabNode[]>(this.tabs);
   activeTabIndexSubject = new BehaviorSubject<number>(0);
-  context = {tabNode: {}};
-  contextSubject = new BehaviorSubject(this.context);
 
   constructor() {
   }
 
   addTab(tabNode: TabNode) {
-    const duplicateIndex = this.tabs.findIndex((item) => item.id == tabNode.id)
+    const duplicateIndex = this.tabs.findIndex((item) => item.id == tabNode.id);
     if (duplicateIndex < 0) {
       this.tabs.push(tabNode);
       this.tabsSubject.next(this.tabs);
-      this.context.tabNode = tabNode;
-      this.contextSubject.next(this.context);
+      let activeIndex = this.tabs.findIndex((item) => item.id == tabNode.id);
+      this.activeTabIndexSubject.next(activeIndex);
     } else {
       this.activeTabIndexSubject.next(duplicateIndex);
     }

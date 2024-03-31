@@ -72,14 +72,16 @@ export class MiListMainComponent implements OnInit {
       let filters = $event.filters;
       keys = Object.keys(filters);
       keys.forEach(key => {
-        let evFilter: any = filters[key];
-        if (evFilter[0].value) {
-          let operator = evFilter[0].matchMode;
-          let right = evFilter[0].value;
-          let filter: FilterChip = new FilterChip(key, operator, right);
-          if (key != "ownerOrganizationId") this.chips = FilterChip.addChip(this.chips, filter);
-        } else {
-          this.chips = FilterChip.removeChipsByField(this.chips, key);
+        if (key != "ownerOrganizationId") {
+          let evFilter: any = filters[key];
+          if (evFilter[0].value) {
+            let operator = evFilter[0].matchMode;
+            let right = evFilter[0].value;
+            let filter: FilterChip = new FilterChip(key, operator, right);
+            this.chips = FilterChip.addChip(this.chips, filter);
+          } else {
+            this.chips = FilterChip.removeChipsByField(this.chips, key);
+          }
         }
 
       })
@@ -111,7 +113,7 @@ export class MiListMainComponent implements OnInit {
     this.loadItems();
   }
 
-  onExportBtnClick(){
+  onExportBtnClick() {
     this.miListMainService.exportData(this.tabNode, this.filtersMetadata);
   }
 }

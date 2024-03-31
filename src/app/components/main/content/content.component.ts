@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TabViewModule} from "primeng/tabview";
 import {NgForOf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet} from "@angular/common";
 import {TabNode, TabViewService} from "../../../services/tab-view.service";
@@ -23,27 +23,23 @@ import {MiScheduleComponent} from "./mi-schedule/mi-schedule.component";
 })
 export class ContentComponent implements OnInit {
 
-  constructor(private tabViewService: TabViewService) {
+  constructor(private tabViewService: TabViewService, private changeDetectionRef: ChangeDetectorRef) {
   }
 
   activeTabIndex: number = 0;
   tabs?: TabNode[];
-  context = {tabNode: {}};
 
   ngOnInit(): void {
     this.tabViewService.tabsSubject.subscribe(value => {
         this.tabs = value;
+        this.changeDetectionRef.detectChanges();
       }
     )
     this.tabViewService.activeTabIndexSubject.subscribe(value => {
         this.activeTabIndex = value;
+        this.changeDetectionRef.detectChanges();
       }
     )
-    this.tabViewService.contextSubject.subscribe(value => {
-        this.context = value;
-      }
-    )
-
   }
 
   removeTab(index: number) {

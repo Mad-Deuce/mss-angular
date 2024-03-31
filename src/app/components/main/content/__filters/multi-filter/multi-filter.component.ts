@@ -31,14 +31,14 @@ export class MultiFilterComponent implements OnInit {
   @Input() type: string = "text";
   @Input() field!: string;
   @Input() matchMode: string = "~"
-  multiSelectOptions: string[] = [];
+  selectOptions: string[] = [];
 
   constructor(private optionsService: OptionsService) {
   }
 
   ngOnInit(): void {
-    this.optionsService.optionsSubject.subscribe(value => this.multiSelectOptions = value);
-    this.optionsService.getOptions(this.field);
+    this.optionsService.optionsSubject.subscribe(value => this.selectOptions = value);
+    if (this.matchMode == "in") this.optionsService.getOptions(this.field);
   }
 
 
