@@ -41,6 +41,20 @@ export class FilterMetaDataUtils {
     return params;
   }
 
+  public static getSingleValueByName(filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; }, name: string) {
+    if (!filtersMetadata) return "";
+    let filter: FilterMetadata | FilterMetadata[] | undefined = filtersMetadata[name];
+    if (filter) {
+      if (Array.isArray(filter)) {
+        return filter[0].value;
+      }
+      return filter.value;
+    } else {
+      return "";
+    }
+  }
+
+
   private static setFiltersToParams(params: HttpParams, springFilters: SpringFilterCustom[]): HttpParams {
     if (springFilters.length == 0) return params;
     springFilters.forEach(filter => {
@@ -63,7 +77,7 @@ export class FilterMetaDataUtils {
     } else {
       result = "\'" + value + "\'";
     }
-    if (result=="[]" || result=="\'\'") return undefined;
+    if (result == "[]" || result == "\'\'") return undefined;
     return result;
   }
 
