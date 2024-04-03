@@ -43,8 +43,10 @@ export class MiScheduleService {
 
     let paramsKey1: string = "maintenanceOrganizationId";
     let paramsKey2: string = "ownerOrganizationId";
+    let paramsKey3: string = "year";
     params = params.set(paramsKey1, FilterMetaDataUtils.getSingleValueByName(filtersMetadata, paramsKey1));
     params = params.set(paramsKey2, FilterMetaDataUtils.getSingleValueByName(filtersMetadata, paramsKey2));
+    params = params.set(paramsKey3, FilterMetaDataUtils.getSingleValueByName(filtersMetadata, paramsKey3));
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
     this.http.get(this.serverBaseUrl + 'api/measuring-instruments/' + uri + '/export', {

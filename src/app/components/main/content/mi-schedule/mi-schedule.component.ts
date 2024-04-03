@@ -113,7 +113,7 @@ export class MiScheduleComponent implements OnInit {
   }
 
   onYearChange(event: Date, dt: Table) {
-    dt.filter(event.getFullYear(), "year", "~");
+    dt.filter(event.getFullYear(), "year", "<:");
   }
 
 
