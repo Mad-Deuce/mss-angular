@@ -69,14 +69,21 @@ export class MiScheduleService {
 export class MiScheduleDto {
   id!: number;
 
+  legalMetrologyCode: number | undefined;
+
   ownerOrganizationId: number | undefined;
   maintenanceOrganizationId: number | undefined;
-  maintenanceTypeId: number | undefined;
-
   measurementType: string | undefined;
+  maintenanceTypeId: number | undefined;
   maintenanceTypeName: string | undefined;
+
+  type: string | undefined;
   name: string | undefined;
-  month: number | undefined;
+  measurementAccuracy: string | undefined;
+  measurementRange: string | undefined;
+  maintenancePeriod: number | undefined;
+  maintenanceDate: Date | undefined;
+  monthNumber: number | undefined;
   year: number | undefined;
   numbers: string[] | undefined;
   dates: string[] | undefined;

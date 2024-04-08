@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class MiListColumnsService {
 
-  private columns: Map<string, Column> = new Map<string, Column>()
+  private columns: Map<string, ListColumn> = new Map<string, ListColumn>()
     .set("measurementType", {
       field: "measurementType",
       header: 'Вид\n вимір.',
@@ -158,39 +158,39 @@ export class MiListColumnsService {
   constructor() {
   }
 
-  getColumns(template: string): Column[] {
+  getColumns(template: string): ListColumn[] {
     if (template == "mi_list_main") return this.getMiListMainColumns();
     if (template == "mi_schedule_technical_control") return this.getMiScheduleTCColumns();
     return [];
   }
 
 
-  private getMiListMainColumns(): Column[] {
-    let result: Column[] = [];
+  private getMiListMainColumns(): ListColumn[] {
+    let result: ListColumn[] = [];
     const keys: string[] = ["measurementType", "type", "name", "manufacturer", "number", "measurementAccuracy",
       "measurementRange", "locate", "maintenanceOrganization", "maintenanceType", "comment"];
     keys.forEach(value => {
-      result.push(<Column>this.columns.get(value))
+      result.push(<ListColumn>this.columns.get(value))
     })
 
     return result;
   }
 
-  private getMiScheduleTCColumns(): Column[] {
-    let result: Column[] = [];
+  private getMiScheduleTCColumns(): ListColumn[] {
+    let result: ListColumn[] = [];
     const keys: string[] = ["measurementType", "typeName", "numbers", "dates",
       "month01Count", "month02Count", "month03Count", "month04Count", "month05Count", "month06Count",
       "month07Count", "month08Count", "month09Count", "month10Count", "month11Count", "month12Count",
     ];
     keys.forEach(value => {
-      result.push(<Column>this.columns.get(value))
+      result.push(<ListColumn>this.columns.get(value))
     })
 
     return result;
   }
 }
 
-export class Column {
+export class ListColumn {
   field?: string;
   header?: string;
   tooltip?: string;

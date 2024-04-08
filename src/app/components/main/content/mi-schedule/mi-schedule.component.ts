@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {ChipModule} from "primeng/chip";
 import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
@@ -11,7 +11,7 @@ import {TabNode} from "../../../../services/tab-view.service";
 import {FilterChip} from "../__filters/FilterChip";
 import {TreeNodeSelectEvent} from "primeng/tree";
 import {MiScheduleDto, MiScheduleService} from "./mi-schedule.service";
-import {Column, ColumnsService} from "./mi-schedule.columns.service";
+import {ScheduleColumn, ColumnsService} from "./mi-schedule.columns.service";
 import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
 
@@ -44,7 +44,7 @@ export class MiScheduleComponent implements OnInit {
   totalRecords: number = 0;
   rows: number = 25;
 
-  cols!: Column[];
+  cols!: ScheduleColumn[];
 
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};

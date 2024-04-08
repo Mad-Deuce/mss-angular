@@ -54,7 +54,7 @@
 
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns" pTooltip="{{col.tooltip}}" class="text-center vertical-align-baseline"
+      <th *ngFor="let col of columns" pTooltip="{{col==undefined ? '' : col.tooltip}}" class="text-center vertical-align-baseline"
           style="white-space: pre-line">
         {{ col.header }}
       </th>
@@ -74,7 +74,7 @@
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr>
       <td *ngFor="let col of columns">
-        {{ rowData[col.field] }}
+        {{ rowData[col.field] == undefined ? '' : rowData[col.field] }}
       </td>
     </tr>
   </ng-template>

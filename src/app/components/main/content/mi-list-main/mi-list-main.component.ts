@@ -11,7 +11,7 @@ import {ChipModule} from "primeng/chip";
 import {NgForOf} from "@angular/common";
 import {FilterMetadata} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
-import {Column, MiListColumnsService} from "./mi-list.columns.service";
+import {ListColumn, MiListColumnsService} from "./mi-list.columns.service";
 import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
 import {FilterChip} from "../__filters/FilterChip";
 
@@ -42,7 +42,7 @@ export class MiListMainComponent implements OnInit {
   totalRecords: number = 0;
   rows: number = 25;
 
-  cols!: Column[];
+  cols!: ListColumn[];
 
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
