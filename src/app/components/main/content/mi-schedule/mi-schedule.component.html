@@ -37,11 +37,13 @@
       ></app-organization-filter>
     </div>
 
-    <p-calendar
-      [(ngModel)]="date"
-      view="year" dateFormat="yy" inputId="yearpicker"
-      (onSelect)="onYearChange($event, dt)"
-    ></p-calendar>
+    <ng-container *ngIf="isShowYearPicker">
+      <p-calendar
+        [(ngModel)]="date"
+        view="year" dateFormat="yy" inputId="yearpicker"
+        (onSelect)="onYearChange($event, dt)"
+      ></p-calendar>
+    </ng-container>
 
 
     <div class="card flex align-items-center gap-2 flex-wrap mt-1">
@@ -54,18 +56,19 @@
 
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns" pTooltip="{{col==undefined ? '' : col.tooltip}}" class="text-center vertical-align-baseline"
+      <th *ngFor="let col of columns" pTooltip="{{col==undefined ? '' : col.tooltip}}"
+          class="text-center vertical-align-baseline"
           style="white-space: pre-line">
-        {{ col.header }}
+        {{ col == undefined ? '' : col.header }}
       </th>
     </tr>
 
     <tr>
-      <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+      <th *ngFor="let col of columns" pSortableColumn="{{col==undefined ? '' : col.field}}">
         <div class="flex justify-content-center align-items-center">
-          <p-sortIcon field="{{col.field}}"></p-sortIcon>
-          <app-multi-filter type="{{col.filterType}}" field="{{col.field}}"
-                            matchMode="{{col.filterMatchMode}}"></app-multi-filter>
+          <p-sortIcon field="{{col==undefined ? '' : col.field}}"></p-sortIcon>
+          <app-multi-filter type="{{col==undefined ? '' : col.filterType}}" field="{{col==undefined ? '' : col.field}}"
+                            matchMode="{{col==undefined ? '' : col.filterMatchMode}}"></app-multi-filter>
         </div>
       </th>
     </tr>
@@ -74,7 +77,7 @@
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr>
       <td *ngFor="let col of columns">
-        {{ rowData[col.field] == undefined ? '' : rowData[col.field] }}
+        {{ col == undefined ? '' : rowData[col.field] }}
       </td>
     </tr>
   </ng-template>

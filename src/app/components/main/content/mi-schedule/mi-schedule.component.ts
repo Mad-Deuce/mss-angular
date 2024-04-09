@@ -2,7 +2,7 @@ import { Component, Input, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {ChipModule} from "primeng/chip";
 import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {OrganizationFilterComponent} from "../__filters/organization-filter/organization-filter.component";
 import {FilterMetadata, SharedModule} from "primeng/api";
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
@@ -28,7 +28,8 @@ import {FormsModule} from "@angular/forms";
     TableModule,
     TooltipModule,
     CalendarModule,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   providers: [MiScheduleService, ColumnsService],
   templateUrl: './mi-schedule.component.html',
@@ -37,6 +38,8 @@ import {FormsModule} from "@angular/forms";
 export class MiScheduleComponent implements OnInit {
 
   @Input() tabNode!: TabNode;
+
+  @Input() isShowYearPicker: boolean = false;
 
   date: Date = new Date();
 

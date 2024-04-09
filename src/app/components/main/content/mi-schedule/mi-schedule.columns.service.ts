@@ -17,13 +17,6 @@ export class ColumnsService implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.setMeasurementTypeColumns();
-    // this.setLegalMetrologyColumns();
-    // this.setNamesColumns();
-    // this.setDatesColumns();
-    // this.setCommentsColumns();
-    // this.setCountColumns();
-    // this.setEmptyColumns();
   }
 
 
@@ -49,7 +42,7 @@ export class ColumnsService implements OnInit {
 
   private getMiScheduleTCColumns(): ScheduleColumn[] {
     let result: ScheduleColumn[] = [];
-    const keys: string[] = ["measurementType", "typeName", "numbers", "dates", "maintenancePlace",
+    const keys: string[] = ["measurementType", "name", "numbers", "dates", "maintenancePlace",
       "month01Count", "month02Count", "month03Count", "month04Count", "month05Count", "month06Count",
       "month07Count", "month08Count", "month09Count", "month10Count", "month11Count", "month12Count",
       "comment"
@@ -85,7 +78,13 @@ export class ColumnsService implements OnInit {
         filterType: "text",
         filterMatchMode: "~"
       })
-
+      .set("numbers", {
+        field: "numbers",
+        header: 'Номер\n ЗВТ',
+        tooltip: "Заводський або інвентарний номер (номери)",
+        filterType: "text",
+        filterMatchMode: "~"
+      })
       .set("measurementAccuracy", {
         field: "measurementAccuracy",
         header: 'Клас\n точності',

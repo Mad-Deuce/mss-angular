@@ -77,12 +77,13 @@ export class MiScheduleDto {
   maintenanceTypeId: number | undefined;
   maintenanceTypeName: string | undefined;
 
+  typeName: string | undefined;
   type: string | undefined;
   name: string | undefined;
   measurementAccuracy: string | undefined;
   measurementRange: string | undefined;
   maintenancePeriod: number | undefined;
-  maintenanceDate: Date | undefined;
+  maintenanceDate: string | undefined;
   monthNumber: number | undefined;
   year: number | undefined;
   numbers: string[] | undefined;
