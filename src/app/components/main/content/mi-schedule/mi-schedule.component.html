@@ -37,13 +37,22 @@
       ></app-organization-filter>
     </div>
 
-    <ng-container *ngIf="isShowYearPicker">
-      <p-calendar
-        [(ngModel)]="date"
-        view="year" dateFormat="yy" inputId="yearpicker"
-        (onSelect)="onYearChange($event, dt)"
-      ></p-calendar>
-    </ng-container>
+    <div class="flex align-items-center justify-content-between">
+      <ng-container *ngIf="showYearPicker">
+        <p-calendar
+          [(ngModel)]="date"
+          view="year" dateFormat="yy" inputId="yearpicker"
+          (onSelect)="onYearChange($event, dt)"
+        ></p-calendar>
+      </ng-container>
+
+      <ng-container *ngIf="showMeasurementTypeSelect">
+        <app-measurement-type-filter placeholder="вид вимірювань"
+                                     (onChanged)="onMeasurementTypeFilterChanged($event, dt)"
+                                     (onReset)="onMeasurementTypeFilterReset(dt)"
+        ></app-measurement-type-filter>
+      </ng-container>
+    </div>
 
 
     <div class="card flex align-items-center gap-2 flex-wrap mt-1">
@@ -67,8 +76,8 @@
       <th *ngFor="let col of columns" pSortableColumn="{{col==undefined ? '' : col.field}}">
         <div class="flex justify-content-center align-items-center">
           <p-sortIcon field="{{col==undefined ? '' : col.field}}"></p-sortIcon>
-          <app-multi-filter type="{{col==undefined ? '' : col.filterType}}" field="{{col==undefined ? '' : col.field}}"
-                            matchMode="{{col==undefined ? '' : col.filterMatchMode}}"></app-multi-filter>
+          <app-column-filter-custom type="{{col==undefined ? '' : col.filterType}}" field="{{col==undefined ? '' : col.field}}"
+                            matchMode="{{col==undefined ? '' : col.filterMatchMode}}"></app-column-filter-custom>
         </div>
       </th>
     </tr>

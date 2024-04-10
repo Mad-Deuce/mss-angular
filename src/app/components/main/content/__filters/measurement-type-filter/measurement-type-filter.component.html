@@ -1,0 +1,7 @@
+<p-multiSelect [options]="options"
+            [(ngModel)]="selectedValue"
+            [showClear]="true"
+            [placeholder]="placeholder"
+            (onChange)="onSelect($event)"
+            (onClear)="onClear()"
+></p-multiSelect>

@@ -48,8 +48,8 @@
       <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
         <div class="flex justify-content-center align-items-center">
           <p-sortIcon field="{{col.field}}"></p-sortIcon>
-          <app-multi-filter type="{{col.filterType}}" field="{{col.field}}"
-                            matchMode="{{col.filterMatchMode}}"></app-multi-filter>
+          <app-column-filter-custom type="{{col.filterType}}" field="{{col.field}}"
+                            matchMode="{{col.filterMatchMode}}"></app-column-filter-custom>
         </div>
       </th>
     </tr>

@@ -8,7 +8,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {OptionsService} from "./options.service";
 
 @Component({
-  selector: 'app-multi-filter',
+  selector: 'app-column-filter-custom',
   standalone: true,
   imports: [
     MultiSelectModule,
@@ -23,10 +23,10 @@ import {OptionsService} from "./options.service";
     NgSwitchDefault
   ],
   providers: [OptionsService],
-  templateUrl: './multi-filter.component.html',
-  styleUrl: './multi-filter.component.scss'
+  templateUrl: './column-filter-custom.component.html',
+  styleUrl: './column-filter-custom.component.scss'
 })
-export class MultiFilterComponent implements OnInit {
+export class ColumnFilterCustomComponent implements OnInit {
 
   @Input() type: string = "text";
   @Input() field!: string;

@@ -12,7 +12,7 @@ import {NgForOf} from "@angular/common";
 import {FilterMetadata} from "primeng/api";
 import {TooltipModule} from "primeng/tooltip";
 import {ListColumn, MiListColumnsService} from "./mi-list.columns.service";
-import {MultiFilterComponent} from "../__filters/multi-filter/multi-filter.component";
+import {ColumnFilterCustomComponent} from "../__filters/column-filter-custom/column-filter-custom.component";
 import {FilterChip} from "../__filters/FilterChip";
 
 
@@ -28,7 +28,7 @@ import {FilterChip} from "../__filters/FilterChip";
     ChipModule,
     NgForOf,
     TooltipModule,
-    MultiFilterComponent
+    ColumnFilterCustomComponent
   ],
   providers: [MiListMainService, MiListColumnsService],
   templateUrl: './mi-list-main.component.html',

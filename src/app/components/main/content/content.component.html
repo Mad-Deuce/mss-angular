@@ -18,11 +18,13 @@
       </ng-template>
 
       <ng-template ngSwitchCase="mi_schedule_technical_control">
-        <ng-container *ngTemplateOutlet="mi_schedule;context:{tabNode:tab, isShowYearPicker:true}"></ng-container>
+        <ng-container *ngTemplateOutlet="mi_schedule;context:{tabNode:tab, showYearPicker:true}"></ng-container>
       </ng-template>
 
       <ng-template ngSwitchCase="mi_schedule_verification">
-        <ng-container *ngTemplateOutlet="mi_schedule;context:{tabNode:tab, isShowYearPicker:true}"></ng-container>
+        <ng-container *ngTemplateOutlet="mi_schedule;context:{tabNode:tab, showYearPicker:true, showMeasurementTypeSelect:true}">
+
+        </ng-container>
       </ng-template>
 
       <ng-template ngSwitchDefault>
@@ -38,8 +40,13 @@
   <app-mi-list-main [tabNode]=tabNode></app-mi-list-main>
 </ng-template>
 
-<ng-template #mi_schedule let-tabNode="tabNode" let-isShowYearPicker="isShowYearPicker">
-  <app-mi-schedule [tabNode]=tabNode [isShowYearPicker]=isShowYearPicker></app-mi-schedule>
+<ng-template #mi_schedule
+             let-tabNode="tabNode"
+             let-showYearPicker="showYearPicker"
+             let-showMeasurementTypeSelect="showMeasurementTypeSelect">
+  <app-mi-schedule [tabNode]=tabNode
+                   [showYearPicker]=showYearPicker
+                   [showMeasurementTypeSelect]=showMeasurementTypeSelect></app-mi-schedule>
 </ng-template>
 
 <ng-template #templateDefault let-tabNode="tabNode">
