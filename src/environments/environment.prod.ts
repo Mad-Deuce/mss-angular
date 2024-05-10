@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://192.168.50.50:8080/'
+  // baseUrl: 'http://192.168.56.10:8080/'
 };

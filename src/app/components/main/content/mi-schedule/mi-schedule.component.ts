@@ -2,7 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {ChipModule} from "primeng/chip";
 import {ColumnFilterCustomComponent} from "../__filters/column-filter-custom/column-filter-custom.component";
-import {NgForOf, NgIf} from "@angular/common";
+import {
+  NgForOf,
+  NgIf,
+} from "@angular/common";
 import {OrganizationFilterComponent} from "../__filters/organization-filter/organization-filter.component";
 import {FilterMetadata, SharedModule} from "primeng/api";
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
@@ -36,7 +39,7 @@ import {MultiSelectChangeEvent} from "primeng/multiselect";
     DropdownModule,
     MeasurementTypeFilterComponent
   ],
-  providers: [MiScheduleService, ColumnsService],
+  providers: [MiScheduleService, ColumnsService,],
   templateUrl: './mi-schedule.component.html',
   styleUrl: './mi-schedule.component.scss'
 })
@@ -58,11 +61,13 @@ export class MiScheduleComponent implements OnInit {
   chips: FilterChip[] = [];
   filtersMetadata: { [s: string]: FilterMetadata | FilterMetadata[]; } = {};
 
-  constructor(private miScheduleService: MiScheduleService, private columnsService: ColumnsService) {
+
+  constructor(private miScheduleService: MiScheduleService, private columnsService: ColumnsService,) {
   }
 
 
   ngOnInit() {
+
     this.miScheduleService.contentSubject.subscribe(value => {
       this.items = value;
     })

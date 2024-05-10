@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
-import {environment} from "../../../../../environments/environment";
 import {TableLazyLoadEvent} from "primeng/table";
 import {FilterMetadata} from "primeng/api";
 import {TabNode} from "../../../../services/tab-view.service";
@@ -9,8 +8,6 @@ import {FilterMetaDataUtils} from "../__filters/FilterMetaDataUtils";
 
 @Injectable()
 export class MiListMainService {
-
-  serverBaseUrl: string = environment.baseUrl;
 
   contentSubject = new BehaviorSubject<MiListMainDto[]>([]);
   totalRecordsSubject = new BehaviorSubject<number>(0);
@@ -30,7 +27,7 @@ export class MiListMainService {
     params = FilterMetaDataUtils.setParams(params, filtersMetadata);
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
-    this.http.get<any>(this.serverBaseUrl + 'api/measuring-instruments/' + uri, {params})
+    this.http.get<any>('/api/measuring-instruments/' + uri, {params})
       .subscribe(value => {
         this.contentSubject.next(value.content)
         this.totalRecordsSubject.next(value.totalElements)
@@ -67,7 +64,7 @@ export class MiListMainService {
     })
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
-    this.http.get(this.serverBaseUrl + 'api/measuring-instruments/' + uri + '/export', {
+    this.http.get('/api/measuring-instruments/' + uri + '/export', {
       params: params,
       responseType: 'arraybuffer'
     })

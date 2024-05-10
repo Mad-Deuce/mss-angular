@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {HttpClient, } from "@angular/common/http";
-import {environment} from "../../../../../../environments/environment";
+import {HttpClient,} from "@angular/common/http";
 
 @Injectable()
 export class OrganizationFilterService {
 
-  serverBaseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient) {
   }
@@ -14,7 +12,7 @@ export class OrganizationFilterService {
   organizationSubject = new BehaviorSubject<any[]>([]);
 
   getOrganizationStructure() {
-    this.http.get<any>(this.serverBaseUrl + 'api/org/structure', {})
+    this.http.get<any>('/api/org/structure', {})
       .subscribe(response => {
         let t = [];
         t.push(response)

@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {environment} from "../../../../../environments/environment";
+import {Injectable, } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {TabNode} from "../../../../services/tab-view.service";
@@ -9,7 +8,6 @@ import {FilterMetaDataUtils} from "../__filters/FilterMetaDataUtils";
 
 @Injectable()
 export class MiScheduleService {
-  serverBaseUrl: string = environment.baseUrl;
 
   contentSubject = new BehaviorSubject<MiScheduleDto[]>([]);
   totalRecordsSubject = new BehaviorSubject<number>(0);
@@ -29,7 +27,7 @@ export class MiScheduleService {
     params = FilterMetaDataUtils.setParams(params, filtersMetadata);
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
-    this.http.get<any>(this.serverBaseUrl + 'api/measuring-instruments/' + uri, {params})
+    this.http.get<any>( '/api/measuring-instruments/' + uri, {params})
       .subscribe(value => {
         this.contentSubject.next(value.content)
         this.totalRecordsSubject.next(value.totalElements)
@@ -51,7 +49,7 @@ export class MiScheduleService {
     params = params.set(paramsKey4, FilterMetaDataUtils.getSingleValueByName(filtersMetadata, paramsKey4));
 
     let uri: string = (tabNode.template).replaceAll("_", "-");
-    this.http.get(this.serverBaseUrl + 'api/measuring-instruments/' + uri + '/export', {
+    this.http.get( '/api/measuring-instruments/' + uri + '/export', {
       params: params,
       responseType: 'arraybuffer'
     })
